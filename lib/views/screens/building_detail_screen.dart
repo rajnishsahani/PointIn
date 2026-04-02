@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../models/building.dart';
 import '../../services/local_storage_service.dart';
+import '../../services/wikipedia_service.dart';
 
 class BuildingDetailScreen extends StatefulWidget {
   final Building building;
@@ -10,19 +12,68 @@ class BuildingDetailScreen extends StatefulWidget {
   State<BuildingDetailScreen> createState() => _BuildingDetailScreenState();
 }
 
-class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
+class _BuildingDetailScreenState extends State<BuildingDetailScreen>
+    with SingleTickerProviderStateMixin {
   final LocalStorageService _storage = LocalStorageService();
+  final WikipediaService _wikipedia = WikipediaService();
   bool _isBookmarked = false;
+  late AnimationController _animController;
+  late Animation<double> _fadeAnimation;
+
+  // Wikipedia data
+  String? _wikiSummary;
+  String? _wikiImageUrl;
+  String? _wikiPageUrl;
+  bool _wikiLoading = false;
 
   @override
   void initState() {
     super.initState();
     _checkBookmark();
+    _loadWikipediaData();
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _animController,
+      curve: Curves.easeIn,
+    );
+    _animController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
   }
 
   Future<void> _checkBookmark() async {
     final result = await _storage.isBookmarked(widget.building.id);
     setState(() => _isBookmarked = result);
+  }
+
+  Future<void> _loadWikipediaData() async {
+    setState(() => _wikiLoading = true);
+
+    // Try building name + "Syracuse University" for better results
+    var data = await _wikipedia.getBuildingSummary(
+      '${widget.building.name} Syracuse University',
+    );
+
+    // If no result, try just the building name
+    if (data['summary'] == null) {
+      data = await _wikipedia.getBuildingSummary(widget.building.name);
+    }
+
+    if (mounted) {
+      setState(() {
+        _wikiSummary = data['summary'];
+        _wikiImageUrl = data['imageUrl'];
+        _wikiPageUrl = data['pageUrl'];
+        _wikiLoading = false;
+      });
+    }
   }
 
   Future<void> _toggleBookmark() async {
@@ -60,7 +111,10 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
           ],
           bottom: TabBar(isScrollable: true, tabs: _buildTabs()),
         ),
-        body: TabBarView(children: _buildTabViews()),
+        body: FadeTransition(
+          opacity: _fadeAnimation,
+          child: TabBarView(children: _buildTabViews()),
+        ),
       ),
     );
   }
@@ -69,7 +123,7 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
     int count = 1;
     if (widget.building.faculty.isNotEmpty) count++;
     if (widget.building.rooms.isNotEmpty) count++;
-    if (widget.building.notableEvents.isNotEmpty) count++;
+    count++; // History tab always shown now (Wikipedia can fill it)
     return count;
   }
 
@@ -78,8 +132,7 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
     if (widget.building.faculty.isNotEmpty)
       tabs.add(const Tab(text: 'Faculty'));
     if (widget.building.rooms.isNotEmpty) tabs.add(const Tab(text: 'Rooms'));
-    if (widget.building.notableEvents.isNotEmpty)
-      tabs.add(const Tab(text: 'History'));
+    tabs.add(const Tab(text: 'History'));
     return tabs;
   }
 
@@ -87,7 +140,7 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
     final views = <Widget>[_buildOverviewTab()];
     if (widget.building.faculty.isNotEmpty) views.add(_buildFacultyTab());
     if (widget.building.rooms.isNotEmpty) views.add(_buildRoomsTab());
-    if (widget.building.notableEvents.isNotEmpty) views.add(_buildHistoryTab());
+    views.add(_buildHistoryTab());
     return views;
   }
 
@@ -97,6 +150,20 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Wikipedia image at top if available
+          if (_wikiImageUrl != null)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                _wikiImageUrl!,
+                width: double.infinity,
+                height: 200,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+              ),
+            ),
+          if (_wikiImageUrl != null) const SizedBox(height: 12),
+
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
@@ -220,6 +287,7 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Architectural style from local data
           if (widget.building.architecturalStyle != null) ...[
             const Text(
               'Architectural Style',
@@ -232,34 +300,112 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
             ),
             const SizedBox(height: 20),
           ],
-          const Text(
-            'Notable Events',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          ...widget.building.notableEvents.map(
-            (event) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 6),
-                    child: Icon(
-                      Icons.circle,
-                      size: 8,
-                      color: Color(0xFFD44500),
+
+          // Notable events from local data
+          if (widget.building.notableEvents.isNotEmpty) ...[
+            const Text(
+              'Notable Events',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            ...widget.building.notableEvents.map(
+              (event) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 6),
+                      child: Icon(
+                        Icons.circle,
+                        size: 8,
+                        color: Color(0xFFD44500),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      event,
-                      style: const TextStyle(fontSize: 15, height: 1.4),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        event,
+                        style: const TextStyle(fontSize: 15, height: 1.4),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+            ),
+            const SizedBox(height: 20),
+          ],
+
+          // Wikipedia section
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.blue.withOpacity(0.2)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    Icon(Icons.language, size: 18, color: Colors.blue),
+                    SizedBox(width: 8),
+                    Text(
+                      'From Wikipedia',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                if (_wikiLoading)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  )
+                else if (_wikiSummary != null) ...[
+                  Text(
+                    _wikiSummary!,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      height: 1.6,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  if (_wikiPageUrl != null) ...[
+                    const SizedBox(height: 12),
+                    GestureDetector(
+                      onTap: () async {
+                        final url = Uri.parse(_wikiPageUrl!);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        }
+                      },
+                      child: const Text(
+                        'Read more on Wikipedia →',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ] else
+                  const Text(
+                    'No Wikipedia article found for this building.',
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+              ],
             ),
           ),
         ],

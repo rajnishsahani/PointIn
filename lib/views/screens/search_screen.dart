@@ -36,16 +36,17 @@ class _SearchScreenState extends State<SearchScreen> {
             decoration: InputDecoration(
               hintText: 'Search buildings, faculty, rooms...',
               prefixIcon: const Icon(Icons.search),
-              suffixIcon: _searchController.text.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        _searchController.clear();
-                        context.read<SearchBloc>().add(ClearSearch());
-                        setState(() {});
-                      },
-                    )
-                  : null,
+              suffixIcon:
+                  _searchController.text.isNotEmpty
+                      ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          _searchController.clear();
+                          context.read<SearchBloc>().add(ClearSearch());
+                          setState(() {});
+                        },
+                      )
+                      : null,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -149,11 +150,14 @@ class _SearchScreenState extends State<SearchScreen> {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: _getTypeColor(building.type).withOpacity(0.1),
-          child: Icon(
-            _getTypeIcon(building.type),
-            color: _getTypeColor(building.type),
+        leading: Hero(
+          tag: 'building-${building.id}',
+          child: CircleAvatar(
+            backgroundColor: _getTypeColor(building.type).withOpacity(0.1),
+            child: Icon(
+              _getTypeIcon(building.type),
+              color: _getTypeColor(building.type),
+            ),
           ),
         ),
         title: Text(
@@ -169,8 +173,27 @@ class _SearchScreenState extends State<SearchScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (_) => BuildingDetailScreen(building: building),
+            PageRouteBuilder(
+              pageBuilder:
+                  (context, animation, secondaryAnimation) =>
+                      BuildingDetailScreen(building: building),
+              transitionsBuilder: (
+                context,
+                animation,
+                secondaryAnimation,
+                child,
+              ) {
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(1.0, 0.0),
+                    end: Offset.zero,
+                  ).animate(
+                    CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+                  ),
+                  child: child,
+                );
+              },
+              transitionDuration: const Duration(milliseconds: 350),
             ),
           );
         },
@@ -187,9 +210,10 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         title: Text(faculty.name),
         subtitle: Text(faculty.title ?? faculty.department ?? ''),
-        trailing: faculty.email != null
-            ? const Icon(Icons.email_outlined, color: Colors.grey)
-            : null,
+        trailing:
+            faculty.email != null
+                ? const Icon(Icons.email_outlined, color: Colors.grey)
+                : null,
       ),
     );
   }
