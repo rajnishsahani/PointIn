@@ -1,0 +1,216 @@
+[
+  {
+    "id": "maxwell_hall",
+    "name": "Maxwell Hall",
+    "type": "university",
+    "latitude": 43.0382,
+    "longitude": -76.1326,
+    "address": "200 Eggers Hall, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Home to the Maxwell School of Citizenship and Public Affairs, consistently ranked the #1 school for public affairs in the United States.",
+    "constructionYear": 1937,
+    "architect": "Dwight James Baum",
+    "architecturalStyle": "Colonial Revival",
+    "notableEvents": ["Named after George Holmes Maxwell, Class of 1874", "Houses the #1 ranked public affairs program", "Major renovation completed in 2018"],
+    "departments": ["Public Administration", "Political Science", "Economics", "International Relations"],
+    "campusRegion": "Main Quad",
+    "faculty": [
+      {"name": "Dr. David Van Slyke", "title": "Dean", "department": "Maxwell School", "officeRoom": "200", "email": "dvanslyke@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Sarah Hamersma", "title": "Associate Dean", "department": "Public Administration", "officeRoom": "215", "email": "shamersm@syr.edu", "phone": "", "imageUrl": ""}
+    ],
+    "rooms": [
+      {"number": "Auditorium", "name": "Maxwell Auditorium", "type": "auditorium", "floor": 1, "capacity": 280},
+      {"number": "200", "name": "Dean's Office", "type": "office", "floor": 2, "capacity": null},
+      {"number": "300A", "name": "Seminar Room", "type": "classroom", "floor": 3, "capacity": 30}
+    ]
+  },
+  {
+    "id": "hendricks_chapel",
+    "name": "Hendricks Chapel",
+    "type": "university",
+    "latitude": 43.0390,
+    "longitude": -76.1305,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "The spiritual heart of Syracuse University, serving as a non-sectarian chapel and gathering place since 1930.",
+    "constructionYear": 1930,
+    "architect": "Dwight James Baum",
+    "architecturalStyle": "Colonial Revival with Georgian elements",
+    "notableEvents": ["Martin Luther King Jr. spoke here in 1961", "Memorial services for Pan Am Flight 103 (1988 Lockerbie bombing)", "Named for benefactor Francis Hendricks"],
+    "departments": ["Chaplaincy", "Interfaith Programs"],
+    "campusRegion": "Main Quad",
+    "faculty": [
+      {"name": "Rev. Brian Konkol", "title": "Dean of Hendricks Chapel", "department": "Chaplaincy", "officeRoom": "Main Office", "email": "bkonkol@syr.edu", "phone": "", "imageUrl": ""}
+    ],
+    "rooms": [
+      {"number": "Main Hall", "name": "Main Sanctuary", "type": "auditorium", "floor": 1, "capacity": 1000},
+      {"number": "Noble Room", "name": "Noble Room", "type": "classroom", "floor": 1, "capacity": 60}
+    ]
+  },
+  {
+    "id": "jma_dome",
+    "name": "JMA Wireless Dome",
+    "type": "university",
+    "latitude": 43.0362,
+    "longitude": -76.1363,
+    "address": "900 Irving Ave, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "The largest domed stadium on a college campus, home to Syracuse Orange football, basketball, and lacrosse.",
+    "constructionYear": 1980,
+    "architect": "Hueber-Hares-Glavin Partnership",
+    "architecturalStyle": "Fixed roof dome (renovated 2022)",
+    "notableEvents": ["Originally named Carrier Dome (1980-2022)", "Renamed JMA Wireless Dome in 2022", "$118 million roof renovation completed 2022"],
+    "departments": ["Athletics"],
+    "campusRegion": "South Campus",
+    "faculty": [],
+    "rooms": [
+      {"number": "Main Floor", "name": "Stadium Floor", "type": "auditorium", "floor": 1, "capacity": 49262}
+    ]
+  },
+  {
+    "id": "bird_library",
+    "name": "Bird Library",
+    "type": "university",
+    "latitude": 43.0387,
+    "longitude": -76.1318,
+    "address": "222 Waverly Ave, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "The main library of Syracuse University, housing over 4 million volumes and serving as a central study space.",
+    "constructionYear": 1972,
+    "architect": "King & King Architects",
+    "architecturalStyle": "Brutalist",
+    "notableEvents": ["Named after Ernest S. Bird, SU benefactor", "Houses Special Collections Research Center", "Major interior renovation in 2010s"],
+    "departments": ["Syracuse University Libraries"],
+    "campusRegion": "Main Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "1st Floor", "name": "Learning Commons", "type": "classroom", "floor": 1, "capacity": 300},
+      {"number": "6th Floor", "name": "Special Collections", "type": "office", "floor": 6, "capacity": 30}
+    ]
+  },
+  {
+    "id": "newhouse",
+    "name": "Newhouse School of Public Communications",
+    "type": "university",
+    "latitude": 43.0371,
+    "longitude": -76.1322,
+    "address": "215 University Pl, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "One of the premier communications schools in the nation, known for journalism, television, advertising, and public relations.",
+    "constructionYear": 1964,
+    "architect": "I.M. Pei (Newhouse I), Polshek Partnership (Newhouse II), Toshiko Mori (Newhouse III)",
+    "architecturalStyle": "Modern / Contemporary",
+    "notableEvents": ["Newhouse I designed by I.M. Pei, opened 1964", "Newhouse III opened 2014", "Alumni include Bob Costas, Ted Koppel, Mike Tirico"],
+    "departments": ["Journalism", "Television-Radio-Film", "Advertising", "Public Relations"],
+    "campusRegion": "South Campus",
+    "faculty": [
+      {"name": "Dr. Mark Lodato", "title": "Dean", "department": "Newhouse School", "officeRoom": "Newhouse III", "email": "mlodato@syr.edu", "phone": "", "imageUrl": ""}
+    ],
+    "rooms": [
+      {"number": "Hergenhan Auditorium", "name": "Hergenhan Auditorium", "type": "auditorium", "floor": 1, "capacity": 340},
+      {"number": "Studio A", "name": "Television Studio A", "type": "lab", "floor": 1, "capacity": 50}
+    ]
+  },
+  {
+    "id": "hall_of_languages",
+    "name": "Hall of Languages",
+    "type": "university",
+    "latitude": 43.0392,
+    "longitude": -76.1335,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "The oldest building on the Syracuse University campus and an iconic symbol of the university.",
+    "constructionYear": 1873,
+    "architect": "Horatio Nelson White",
+    "architecturalStyle": "Second Empire / French Renaissance",
+    "notableEvents": ["First building constructed on campus (1871-1873)", "Originally housed the entire university", "Listed on the National Register of Historic Places"],
+    "departments": ["Languages, Literatures & Linguistics", "Philosophy", "Religion"],
+    "campusRegion": "Main Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "107", "name": "Kittredge Auditorium", "type": "auditorium", "floor": 1, "capacity": 240}
+    ]
+  },
+  {
+    "id": "link_hall",
+    "name": "Link Hall",
+    "type": "university",
+    "latitude": 43.0378,
+    "longitude": -76.1351,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Home to the College of Engineering and Computer Science, housing classrooms, labs, and research facilities.",
+    "constructionYear": 1969,
+    "architect": "King & King Architects",
+    "architecturalStyle": "Brutalist / Modern",
+    "notableEvents": ["Named after Edwin Albert Link, inventor of the Link Trainer flight simulator", "Houses ECS makerspace and senior design labs"],
+    "departments": ["Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering"],
+    "campusRegion": "South Campus",
+    "faculty": [
+      {"name": "Dr. J. Cole Smith", "title": "Dean, College of ECS", "department": "Engineering & Computer Science", "officeRoom": "Link 100", "email": "jcsmith@syr.edu", "phone": "", "imageUrl": ""}
+    ],
+    "rooms": [
+      {"number": "105", "name": "Large Lecture Hall", "type": "classroom", "floor": 1, "capacity": 150},
+      {"number": "241", "name": "Computer Lab", "type": "lab", "floor": 2, "capacity": 40}
+    ]
+  },
+  {
+    "id": "crouse_college",
+    "name": "Crouse College",
+    "type": "university",
+    "latitude": 43.0394,
+    "longitude": -76.1326,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Home to the Setnor School of Music, one of the most iconic and photographed buildings on the SU campus.",
+    "constructionYear": 1889,
+    "architect": "Archimedes Russell",
+    "architecturalStyle": "Romanesque Revival",
+    "notableEvents": ["Named after John Crouse, SU benefactor", "Houses Setnor Auditorium — a 688-seat concert hall", "Listed on the National Register of Historic Places"],
+    "departments": ["Setnor School of Music"],
+    "campusRegion": "Main Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "Setnor Auditorium", "name": "Setnor Auditorium", "type": "auditorium", "floor": 1, "capacity": 688}
+    ]
+  },
+  {
+    "id": "schine_center",
+    "name": "Schine Student Center",
+    "type": "mixed",
+    "latitude": 43.0379,
+    "longitude": -76.1310,
+    "address": "303 University Pl, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "The main student union at Syracuse University, housing dining, student organizations, a bookstore, and event spaces.",
+    "constructionYear": 1985,
+    "architect": "King & King Architects",
+    "architecturalStyle": "Postmodern",
+    "notableEvents": ["Named after benefactor Robert B. Schine", "Houses SU Bookstore, Underground dining, movie theater"],
+    "departments": ["Student Affairs", "Student Organizations"],
+    "campusRegion": "Main Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "Underground", "name": "Schine Underground", "type": "other", "floor": 0, "capacity": 200},
+      {"number": "304", "name": "Goldstein Auditorium", "type": "auditorium", "floor": 3, "capacity": 500}
+    ]
+  },
+  {
+    "id": "destiny_usa",
+    "name": "Destiny USA",
+    "type": "commercial",
+    "latitude": 43.0722,
+    "longitude": -76.1724,
+    "address": "9090 Destiny USA Dr, Syracuse, NY 13204",
+    "imageUrl": "",
+    "description": "The largest shopping and entertainment complex in New York State, featuring over 250 stores, restaurants, and entertainment venues.",
+    "constructionYear": 1990,
+    "architect": "The Pyramid Companies",
+    "architecturalStyle": "Commercial / Mixed-Use Mall",
+    "notableEvents": ["Originally opened as Carousel Center in 1990", "Expanded and renamed Destiny USA in 2012"],
+    "departments": [],
+    "campusRegion": null,
+    "faculty": [],
+    "rooms": []
+  }
+]
