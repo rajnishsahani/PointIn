@@ -1,9 +1,45 @@
 import 'package:flutter/material.dart';
 import '../../models/building.dart';
+import '../../services/local_storage_service.dart';
 
-class BuildingDetailScreen extends StatelessWidget {
+class BuildingDetailScreen extends StatefulWidget {
   final Building building;
   const BuildingDetailScreen({super.key, required this.building});
+
+  @override
+  State<BuildingDetailScreen> createState() => _BuildingDetailScreenState();
+}
+
+class _BuildingDetailScreenState extends State<BuildingDetailScreen> {
+  final LocalStorageService _storage = LocalStorageService();
+  bool _isBookmarked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkBookmark();
+  }
+
+  Future<void> _checkBookmark() async {
+    final result = await _storage.isBookmarked(widget.building.id);
+    setState(() => _isBookmarked = result);
+  }
+
+  Future<void> _toggleBookmark() async {
+    if (_isBookmarked) {
+      await _storage.removeBookmark(widget.building.id);
+    } else {
+      await _storage.addBookmark(widget.building.id);
+    }
+    setState(() => _isBookmarked = !_isBookmarked);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(_isBookmarked ? 'Bookmarked!' : 'Bookmark removed'),
+        duration: const Duration(seconds: 1),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +47,14 @@ class BuildingDetailScreen extends StatelessWidget {
       length: _getTabCount(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(building.name),
+          title: Text(widget.building.name),
           actions: [
             IconButton(
-              icon: const Icon(Icons.bookmark_border),
-              onPressed: () {},
+              icon: Icon(
+                _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                color: _isBookmarked ? const Color(0xFFD44500) : null,
+              ),
+              onPressed: _toggleBookmark,
             ),
             IconButton(icon: const Icon(Icons.share), onPressed: () {}),
           ],
@@ -28,25 +67,27 @@ class BuildingDetailScreen extends StatelessWidget {
 
   int _getTabCount() {
     int count = 1;
-    if (building.faculty.isNotEmpty) count++;
-    if (building.rooms.isNotEmpty) count++;
-    if (building.notableEvents.isNotEmpty) count++;
+    if (widget.building.faculty.isNotEmpty) count++;
+    if (widget.building.rooms.isNotEmpty) count++;
+    if (widget.building.notableEvents.isNotEmpty) count++;
     return count;
   }
 
   List<Tab> _buildTabs() {
     final tabs = <Tab>[const Tab(text: 'Overview')];
-    if (building.faculty.isNotEmpty) tabs.add(const Tab(text: 'Faculty'));
-    if (building.rooms.isNotEmpty) tabs.add(const Tab(text: 'Rooms'));
-    if (building.notableEvents.isNotEmpty) tabs.add(const Tab(text: 'History'));
+    if (widget.building.faculty.isNotEmpty)
+      tabs.add(const Tab(text: 'Faculty'));
+    if (widget.building.rooms.isNotEmpty) tabs.add(const Tab(text: 'Rooms'));
+    if (widget.building.notableEvents.isNotEmpty)
+      tabs.add(const Tab(text: 'History'));
     return tabs;
   }
 
   List<Widget> _buildTabViews() {
     final views = <Widget>[_buildOverviewTab()];
-    if (building.faculty.isNotEmpty) views.add(_buildFacultyTab());
-    if (building.rooms.isNotEmpty) views.add(_buildRoomsTab());
-    if (building.notableEvents.isNotEmpty) views.add(_buildHistoryTab());
+    if (widget.building.faculty.isNotEmpty) views.add(_buildFacultyTab());
+    if (widget.building.rooms.isNotEmpty) views.add(_buildRoomsTab());
+    if (widget.building.notableEvents.isNotEmpty) views.add(_buildHistoryTab());
     return views;
   }
 
@@ -56,7 +97,6 @@ class BuildingDetailScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Type badge
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
@@ -64,7 +104,7 @@ class BuildingDetailScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              building.type.name.toUpperCase(),
+              widget.building.type.name.toUpperCase(),
               style: TextStyle(
                 color: _getTypeColor(),
                 fontWeight: FontWeight.bold,
@@ -73,25 +113,29 @@ class BuildingDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          if (building.description != null)
+          if (widget.building.description != null)
             Text(
-              building.description!,
+              widget.building.description!,
               style: const TextStyle(fontSize: 16, height: 1.5),
             ),
           const SizedBox(height: 16),
-          if (building.constructionYear != null)
+          if (widget.building.constructionYear != null)
             _infoRow(
               Icons.calendar_today,
               'Built',
-              '${building.constructionYear}',
+              '${widget.building.constructionYear}',
             ),
-          if (building.architect != null)
-            _infoRow(Icons.architecture, 'Architect', building.architect!),
-          if (building.architecturalStyle != null)
-            _infoRow(Icons.style, 'Style', building.architecturalStyle!),
-          if (building.address != null)
-            _infoRow(Icons.location_on, 'Address', building.address!),
-          if (building.departments.isNotEmpty) ...[
+          if (widget.building.architect != null)
+            _infoRow(
+              Icons.architecture,
+              'Architect',
+              widget.building.architect!,
+            ),
+          if (widget.building.architecturalStyle != null)
+            _infoRow(Icons.style, 'Style', widget.building.architecturalStyle!),
+          if (widget.building.address != null)
+            _infoRow(Icons.location_on, 'Address', widget.building.address!),
+          if (widget.building.departments.isNotEmpty) ...[
             const SizedBox(height: 16),
             const Text(
               'Departments',
@@ -101,13 +145,14 @@ class BuildingDetailScreen extends StatelessWidget {
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: building.departments
-                  .map(
-                    (d) => Chip(
-                      label: Text(d, style: const TextStyle(fontSize: 13)),
-                    ),
-                  )
-                  .toList(),
+              children:
+                  widget.building.departments
+                      .map(
+                        (d) => Chip(
+                          label: Text(d, style: const TextStyle(fontSize: 13)),
+                        ),
+                      )
+                      .toList(),
             ),
           ],
         ],
@@ -118,10 +163,10 @@ class BuildingDetailScreen extends StatelessWidget {
   Widget _buildFacultyTab() {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
-      itemCount: building.faculty.length,
+      itemCount: widget.building.faculty.length,
       separatorBuilder: (_, __) => const Divider(),
       itemBuilder: (context, index) {
-        final f = building.faculty[index];
+        final f = widget.building.faculty[index];
         return ListTile(
           leading: CircleAvatar(
             child: Text(f.name.split(' ').map((n) => n[0]).take(2).join()),
@@ -132,14 +177,15 @@ class BuildingDetailScreen extends StatelessWidget {
           ),
           subtitle: Text('${f.title ?? ''}\n${f.department ?? ''}'),
           isThreeLine: true,
-          trailing: f.officeRoom != null
-              ? Chip(
-                  label: Text(
-                    'Room ${f.officeRoom}',
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                )
-              : null,
+          trailing:
+              f.officeRoom != null
+                  ? Chip(
+                    label: Text(
+                      'Room ${f.officeRoom}',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  )
+                  : null,
         );
       },
     );
@@ -148,20 +194,21 @@ class BuildingDetailScreen extends StatelessWidget {
   Widget _buildRoomsTab() {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
-      itemCount: building.rooms.length,
+      itemCount: widget.building.rooms.length,
       separatorBuilder: (_, __) => const Divider(),
       itemBuilder: (context, index) {
-        final r = building.rooms[index];
+        final r = widget.building.rooms[index];
         return ListTile(
           leading: Icon(_getRoomIcon(r.type), color: Colors.grey[700]),
           title: Text(r.name ?? 'Room ${r.number}'),
           subtitle: Text('Room ${r.number} • Floor ${r.floor ?? "N/A"}'),
-          trailing: r.capacity != null
-              ? Text(
-                  '${r.capacity} seats',
-                  style: const TextStyle(color: Colors.grey),
-                )
-              : null,
+          trailing:
+              r.capacity != null
+                  ? Text(
+                    '${r.capacity} seats',
+                    style: const TextStyle(color: Colors.grey),
+                  )
+                  : null,
         );
       },
     );
@@ -173,14 +220,14 @@ class BuildingDetailScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (building.architecturalStyle != null) ...[
+          if (widget.building.architecturalStyle != null) ...[
             const Text(
               'Architectural Style',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
-              building.architecturalStyle!,
+              widget.building.architecturalStyle!,
               style: const TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 20),
@@ -190,7 +237,7 @@ class BuildingDetailScreen extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          ...building.notableEvents.map(
+          ...widget.building.notableEvents.map(
             (event) => Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
@@ -250,7 +297,7 @@ class BuildingDetailScreen extends StatelessWidget {
   }
 
   Color _getTypeColor() {
-    switch (building.type) {
+    switch (widget.building.type) {
       case BuildingType.university:
         return const Color(0xFFD44500);
       case BuildingType.commercial:

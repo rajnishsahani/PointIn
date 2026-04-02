@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'map_screen.dart';
 import 'camera_screen.dart';
 import 'search_screen.dart';
+import 'bookmarks_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,7 +26,15 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('PointIn'),
         actions: [
-          IconButton(icon: const Icon(Icons.bookmark_border), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.bookmark_border),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const BookmarksScreen()),
+              );
+            },
+          ),
           IconButton(icon: const Icon(Icons.filter_list), onPressed: () {}),
         ],
       ),
