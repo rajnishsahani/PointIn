@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'map_screen.dart';
+import 'camera_screen.dart';
 import 'search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +13,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [MapScreen(), SearchScreen()];
+  final List<Widget> _screens = const [
+    MapScreen(),
+    CameraScreen(),
+    SearchScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.map_outlined),
             activeIcon: Icon(Icons.map),
             label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera_alt_outlined),
+            activeIcon: Icon(Icons.camera_alt),
+            label: 'Camera',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
