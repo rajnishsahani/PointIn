@@ -30,3 +30,97 @@ PointIn is a cross-platform mobile app built with Flutter that uses **GPS** and 
 ---
 
 ## Architecture — BLoC Pattern
+| BLoC | Responsibility |
+|------|---------------|
+| **BuildingBloc** | Loads buildings, filters by type, selects detail |
+| **SearchBloc** | Real-time search across buildings and faculty |
+| **CameraBloc** | Camera initialization, AR overlay state |
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|----------|-----------|
+| Framework | Flutter (Dart) |
+| State Management | BLoC (flutter_bloc) |
+| Maps | Google Maps SDK for Android |
+| Location | Geolocator |
+| Camera | camera package |
+| Database | Firebase Firestore + Hive (local) |
+| APIs | Google Places, Wikipedia REST API |
+| Storage | Hive (bookmarks, cache) |
+
+---
+
+## Features Implemented
+
+- [x] Google Maps with custom building pins and tap-to-preview
+- [x] GPS-based nearest building detection
+- [x] Live camera with AR-style building overlay
+- [x] Search with live filtering (buildings, faculty, rooms)
+- [x] Building detail with tabbed view (Overview / Faculty / Rooms / History)
+- [x] Wikipedia API integration for building history
+- [x] Bookmark buildings with persistent local storage (Hive)
+- [x] Filter by building type (University / Commercial / Mixed)
+- [x] Landscape and portrait layout support
+- [x] Fade-in animations on detail screens
+- [x] Bottom tab navigation (Map / Camera / Search)
+
+---
+
+## Setup
+
+1. Clone this repo
+```bash
+git clone https://github.com/rajnishsahani/PointIn.git
+cd PointIn
+```
+
+2. Create `lib/utils/api_keys.dart` with your Google Maps API key
+
+3. Install dependencies and run
+```bash
+flutter pub get
+flutter run
+```
+
+---
+
+## Project Structure
+lib/
+├── main.dart                    # App entry point
+├── models/
+│   └── building.dart            # Building, Faculty, Room models
+├── blocs/
+│   ├── building/building_bloc.dart
+│   └── search/search_bloc.dart
+├── views/
+│   ├── screens/                 # Map, Camera, Search, Detail, Bookmarks
+│   └── widgets/                 # Reusable UI components
+├── services/
+│   ├── building_service.dart    # Load/search building data
+│   ├── location_service.dart    # GPS wrapper
+│   ├── wikipedia_service.dart   # Wikipedia API
+│   └── local_storage_service.dart # Hive bookmarks
+└── utils/
+├── app_theme.dart           # SU Orange theme
+├── constants.dart           # App constants
+└── helpers.dart             # Distance calculations
+
+
+---
+
+## Competitive Advantage
+
+No existing app combines AR building recognition, university-specific data, commercial listings, and building history in one experience. PointIn is unique in its contextual mode switching — automatically adapting the displayed information based on building type.
+
+| Feature | Google Maps | Yelp | Google Lens | SU Maps | **PointIn** |
+|---------|------------|------|-------------|---------|-------------|
+| AR building overlay | ✓ | ✗ | ✗ | ✗ | **✓** |
+| University data | ✗ | ✗ | ✗ | ✓ | **✓** |
+| Restaurant listings | ✗ | ✓ | ✗ | ✗ | **✓** |
+| Building history | ✗ | ✗ | ✗ | ✗ | **✓** |
+| Context switching | ✗ | ✗ | ✗ | ✗ | **✓** |
+
+
