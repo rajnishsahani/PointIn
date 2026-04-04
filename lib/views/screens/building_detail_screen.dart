@@ -20,7 +20,6 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
   late AnimationController _animController;
   late Animation<double> _fadeAnimation;
 
-  // Wikipedia data
   String? _wikiSummary;
   String? _wikiImageUrl;
   String? _wikiPageUrl;
@@ -55,17 +54,12 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
 
   Future<void> _loadWikipediaData() async {
     setState(() => _wikiLoading = true);
-
-    // Try building name + "Syracuse University" for better results
     var data = await _wikipedia.getBuildingSummary(
       '${widget.building.name} Syracuse University',
     );
-
-    // If no result, try just the building name
     if (data['summary'] == null) {
       data = await _wikipedia.getBuildingSummary(widget.building.name);
     }
-
     if (mounted) {
       setState(() {
         _wikiSummary = data['summary'];
@@ -83,13 +77,21 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
       await _storage.addBookmark(widget.building.id);
     }
     setState(() => _isBookmarked = !_isBookmarked);
-
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(_isBookmarked ? 'Bookmarked!' : 'Bookmark removed'),
         duration: const Duration(seconds: 1),
       ),
     );
+  }
+
+  Future<void> _openDirections() async {
+    final url = Uri.parse(
+      'https://www.google.com/maps/dir/?api=1&destination=${widget.building.latitude},${widget.building.longitude}&travelmode=walking',
+    );
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    }
   }
 
   @override
@@ -123,7 +125,7 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
     int count = 1;
     if (widget.building.faculty.isNotEmpty) count++;
     if (widget.building.rooms.isNotEmpty) count++;
-    count++; // History tab always shown now (Wikipedia can fill it)
+    count++;
     return count;
   }
 
@@ -144,86 +146,251 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
     return views;
   }
 
-  Widget _buildOverviewTab() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Wikipedia image at top if available
-          if (_wikiImageUrl != null)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                _wikiImageUrl!,
-                width: double.infinity,
-                height: 200,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => const SizedBox.shrink(),
-              ),
-            ),
-          if (_wikiImageUrl != null) const SizedBox(height: 12),
-
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            decoration: BoxDecoration(
-              color: _getTypeColor().withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              widget.building.type.name.toUpperCase(),
-              style: TextStyle(
-                color: _getTypeColor(),
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-              ),
-            ),
+  Widget _buildDirectionsButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        onPressed: _openDirections,
+        icon: const Icon(Icons.directions_walk, color: Colors.white),
+        label: const Text(
+          'Get Directions',
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFFD44500),
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-          const SizedBox(height: 12),
-          if (widget.building.description != null)
-            Text(
-              widget.building.description!,
-              style: const TextStyle(fontSize: 16, height: 1.5),
-            ),
-          const SizedBox(height: 16),
-          if (widget.building.constructionYear != null)
-            _infoRow(
-              Icons.calendar_today,
-              'Built',
-              '${widget.building.constructionYear}',
-            ),
-          if (widget.building.architect != null)
-            _infoRow(
-              Icons.architecture,
-              'Architect',
-              widget.building.architect!,
-            ),
-          if (widget.building.architecturalStyle != null)
-            _infoRow(Icons.style, 'Style', widget.building.architecturalStyle!),
-          if (widget.building.address != null)
-            _infoRow(Icons.location_on, 'Address', widget.building.address!),
-          if (widget.building.departments.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            const Text(
-              'Departments',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children:
-                  widget.building.departments
-                      .map(
-                        (d) => Chip(
-                          label: Text(d, style: const TextStyle(fontSize: 13)),
-                        ),
-                      )
-                      .toList(),
-            ),
-          ],
-        ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildOverviewTab() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isLandscape = constraints.maxWidth > 600;
+
+        if (isLandscape) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (_wikiImageUrl != null)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                _wikiImageUrl!,
+                                width: double.infinity,
+                                height: 200,
+                                fit: BoxFit.cover,
+                                errorBuilder:
+                                    (_, __, ___) => const SizedBox.shrink(),
+                              ),
+                            ),
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: _getTypeColor().withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              widget.building.type.name.toUpperCase(),
+                              style: TextStyle(
+                                color: _getTypeColor(),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          if (widget.building.description != null)
+                            Text(
+                              widget.building.description!,
+                              style: const TextStyle(fontSize: 16, height: 1.5),
+                            ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 24),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (widget.building.constructionYear != null)
+                            _infoRow(
+                              Icons.calendar_today,
+                              'Built',
+                              '${widget.building.constructionYear}',
+                            ),
+                          if (widget.building.architect != null)
+                            _infoRow(
+                              Icons.architecture,
+                              'Architect',
+                              widget.building.architect!,
+                            ),
+                          if (widget.building.architecturalStyle != null)
+                            _infoRow(
+                              Icons.style,
+                              'Style',
+                              widget.building.architecturalStyle!,
+                            ),
+                          if (widget.building.address != null)
+                            _infoRow(
+                              Icons.location_on,
+                              'Address',
+                              widget.building.address!,
+                            ),
+                          if (widget.building.departments.isNotEmpty) ...[
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Departments',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children:
+                                  widget.building.departments
+                                      .map(
+                                        (d) => Chip(
+                                          label: Text(
+                                            d,
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                _buildDirectionsButton(),
+              ],
+            ),
+          );
+        }
+
+        // Portrait: single column
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (_wikiImageUrl != null)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    _wikiImageUrl!,
+                    width: double.infinity,
+                    height: 200,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                  ),
+                ),
+              if (_wikiImageUrl != null) const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: _getTypeColor().withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  widget.building.type.name.toUpperCase(),
+                  style: TextStyle(
+                    color: _getTypeColor(),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              if (widget.building.description != null)
+                Text(
+                  widget.building.description!,
+                  style: const TextStyle(fontSize: 16, height: 1.5),
+                ),
+              const SizedBox(height: 16),
+              if (widget.building.constructionYear != null)
+                _infoRow(
+                  Icons.calendar_today,
+                  'Built',
+                  '${widget.building.constructionYear}',
+                ),
+              if (widget.building.architect != null)
+                _infoRow(
+                  Icons.architecture,
+                  'Architect',
+                  widget.building.architect!,
+                ),
+              if (widget.building.architecturalStyle != null)
+                _infoRow(
+                  Icons.style,
+                  'Style',
+                  widget.building.architecturalStyle!,
+                ),
+              if (widget.building.address != null)
+                _infoRow(
+                  Icons.location_on,
+                  'Address',
+                  widget.building.address!,
+                ),
+              if (widget.building.departments.isNotEmpty) ...[
+                const SizedBox(height: 16),
+                const Text(
+                  'Departments',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children:
+                      widget.building.departments
+                          .map(
+                            (d) => Chip(
+                              label: Text(
+                                d,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                ),
+              ],
+              const SizedBox(height: 24),
+              _buildDirectionsButton(),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -287,7 +454,6 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Architectural style from local data
           if (widget.building.architecturalStyle != null) ...[
             const Text(
               'Architectural Style',
@@ -300,8 +466,6 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
             ),
             const SizedBox(height: 20),
           ],
-
-          // Notable events from local data
           if (widget.building.notableEvents.isNotEmpty) ...[
             const Text(
               'Notable Events',
@@ -335,8 +499,6 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
             ),
             const SizedBox(height: 20),
           ],
-
-          // Wikipedia section
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
