@@ -25,7 +25,6 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Search bar
         Padding(
           padding: const EdgeInsets.all(16),
           child: TextField(
@@ -56,16 +55,12 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
         ),
-
-        // Results
         Expanded(
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
-              // Default view — show all buildings
               if (state is SearchInitial) {
                 return _buildAllBuildings();
               }
-              // No results
               if (state is SearchEmpty) {
                 return Center(
                   child: Column(
@@ -88,7 +83,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 );
               }
-              // Search results
               if (state is SearchResults) {
                 return ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16),

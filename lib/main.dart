@@ -38,7 +38,7 @@ class PointInApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        home: const HomeScreen(),
+        home: HomeScreen(),
       ),
     );
   }

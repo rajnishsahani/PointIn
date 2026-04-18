@@ -7,6 +7,7 @@ import '../../models/building.dart';
 import '../../services/location_service.dart';
 import '../../utils/constants.dart';
 import '../../utils/helpers.dart';
+import '../../services/places_service.dart';
 import 'building_detail_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -23,6 +24,10 @@ class _MapScreenState extends State<MapScreen> {
   final LocationService _locationService = LocationService();
   Building? _nearestBuilding;
   String? _nearestDistance;
+  final Map<String, String?> _buildingPhotos = {};
+  final PlacesService _placesService = PlacesService(
+    apiKey: 'AIzaSyD3LT18vanu6-6ONyTjQHql9fRocSCFR-c',
+  );
 
   @override
   void initState() {
@@ -34,23 +39,19 @@ class _MapScreenState extends State<MapScreen> {
     final hasPermission = await _locationService.requestPermission();
     if (!hasPermission) return;
 
-    // Get initial position
     final position = await _locationService.getCurrentPosition();
     setState(() => _currentPosition = position);
 
-    // Move camera to user location
     _mapController?.animateCamera(
       CameraUpdate.newLatLng(LatLng(position.latitude, position.longitude)),
     );
 
-    // Listen for position updates
     _locationService.getPositionStream().listen((position) {
       setState(() => _currentPosition = position);
       _updateNearestBuilding(position);
     });
   }
 
-  // Find which building is closest to the user
   void _updateNearestBuilding(Position position) {
     final state = context.read<BuildingBloc>().state;
     if (state is! BuildingsLoaded) return;
@@ -84,6 +85,19 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
+  Future<void> _loadBuildingPhoto(Building building) async {
+    if (_buildingPhotos.containsKey(building.id)) return;
+    _buildingPhotos[building.id] = null;
+    final url = await _placesService.getBuildingPhoto(
+      building.name,
+      building.latitude,
+      building.longitude,
+    );
+    if (mounted) {
+      setState(() => _buildingPhotos[building.id] = url);
+    }
+  }
+
   Set<Marker> _buildMarkers(List<Building> buildings) {
     return buildings.map((building) {
       return Marker(
@@ -97,6 +111,7 @@ class _MapScreenState extends State<MapScreen> {
         ),
         onTap: () {
           setState(() => _selectedBuilding = building);
+          _loadBuildingPhoto(building);
         },
       );
     }).toSet();
@@ -117,7 +132,6 @@ class _MapScreenState extends State<MapScreen> {
         if (state is BuildingsLoaded) {
           return Stack(
             children: [
-              // Google Map
               GoogleMap(
                 initialCameraPosition: CameraPosition(
                   target:
@@ -152,10 +166,9 @@ class _MapScreenState extends State<MapScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder:
-                              (_) => BuildingDetailScreen(
-                                building: _nearestBuilding!,
-                              ),
+                          builder: (_) => BuildingDetailScreen(
+                            building: _nearestBuilding!,
+                          ),
                         ),
                       );
                     },
@@ -210,10 +223,9 @@ class _MapScreenState extends State<MapScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder:
-                              (_) => BuildingDetailScreen(
-                                building: _selectedBuilding!,
-                              ),
+                          builder: (_) => BuildingDetailScreen(
+                            building: _selectedBuilding!,
+                          ),
                         ),
                       );
                     },
@@ -223,22 +235,55 @@ class _MapScreenState extends State<MapScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(12),
                         child: Row(
                           children: [
-                            Container(
-                              width: 48,
-                              height: 48,
-                              decoration: BoxDecoration(
-                                color: _getTypeColor(
-                                  _selectedBuilding!.type,
-                                ).withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Icon(
-                                _getTypeIcon(_selectedBuilding!.type),
-                                color: _getTypeColor(_selectedBuilding!.type),
-                              ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child:
+                                  _buildingPhotos[_selectedBuilding!.id] != null
+                                      ? Image.network(
+                                        _buildingPhotos[_selectedBuilding!.id]!,
+                                        width: 90,
+                                        height: 90,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (_, __, ___) => Container(
+                                              width: 90,
+                                              height: 90,
+                                              decoration: BoxDecoration(
+                                                color: _getTypeColor(
+                                                  _selectedBuilding!.type,
+                                                ).withOpacity(0.1),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: Icon(
+                                                _getTypeIcon(
+                                                  _selectedBuilding!.type,
+                                                ),
+                                                color: _getTypeColor(
+                                                  _selectedBuilding!.type,
+                                                ),
+                                              ),
+                                            ),
+                                      )
+                                      : Container(
+                                        width: 64,
+                                        height: 64,
+                                        decoration: BoxDecoration(
+                                          color: _getTypeColor(
+                                            _selectedBuilding!.type,
+                                          ).withOpacity(0.1),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Icon(
+                                          _getTypeIcon(_selectedBuilding!.type),
+                                          color: _getTypeColor(
+                                            _selectedBuilding!.type,
+                                          ),
+                                        ),
+                                      ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(

@@ -3,6 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../models/building.dart';
 import '../../services/local_storage_service.dart';
 import '../../services/wikipedia_service.dart';
+import '../../services/places_service.dart';
+import 'home_screen.dart';
 
 class BuildingDetailScreen extends StatefulWidget {
   final Building building;
@@ -25,11 +27,17 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
   String? _wikiPageUrl;
   bool _wikiLoading = false;
 
+  String? _placesImageUrl;
+  final PlacesService _placesService = PlacesService(
+    apiKey: 'AIzaSyD3LT18vanu6-6ONyTjQHql9fRocSCFR-c',
+  );
+
   @override
   void initState() {
     super.initState();
     _checkBookmark();
     _loadWikipediaData();
+    _loadPlacesPhoto();
     _animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -70,6 +78,19 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
     }
   }
 
+  Future<void> _loadPlacesPhoto() async {
+    final photoUrl = await _placesService.getBuildingPhoto(
+      widget.building.name,
+      widget.building.latitude,
+      widget.building.longitude,
+    );
+    if (mounted && photoUrl != null) {
+      setState(() {
+        _placesImageUrl = photoUrl;
+      });
+    }
+  }
+
   Future<void> _toggleBookmark() async {
     if (_isBookmarked) {
       await _storage.removeBookmark(widget.building.id);
@@ -86,12 +107,9 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
   }
 
   Future<void> _openDirections() async {
-    final url = Uri.parse(
-      'https://www.google.com/maps/dir/?api=1&destination=${widget.building.latitude},${widget.building.longitude}&travelmode=walking',
-    );
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    }
+    final building = widget.building;
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    homeScreenKey.currentState?.navigateToCameraWithTarget(building);
   }
 
   @override
@@ -185,11 +203,11 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (_wikiImageUrl != null)
+                          if (_placesImageUrl != null || _wikiImageUrl != null)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: Image.network(
-                                _wikiImageUrl!,
+                                _placesImageUrl ?? _wikiImageUrl!,
                                 width: double.infinity,
                                 height: 200,
                                 fit: BoxFit.cover,
@@ -301,18 +319,19 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (_wikiImageUrl != null)
+              if (_placesImageUrl != null || _wikiImageUrl != null)
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
-                    _wikiImageUrl!,
+                    _placesImageUrl ?? _wikiImageUrl!,
                     width: double.infinity,
                     height: 200,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                   ),
                 ),
-              if (_wikiImageUrl != null) const SizedBox(height: 12),
+              if (_placesImageUrl != null || _wikiImageUrl != null)
+                const SizedBox(height: 12),
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -403,7 +422,14 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
         final f = widget.building.faculty[index];
         return ListTile(
           leading: CircleAvatar(
-            child: Text(f.name.split(' ').map((n) => n[0]).take(2).join()),
+            backgroundColor: const Color(0xFFD44500).withOpacity(0.1),
+            child: Text(
+              f.name.split(' ').map((n) => n[0]).take(2).join(),
+              style: const TextStyle(
+                color: Color(0xFFD44500),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           title: Text(
             f.name,
@@ -420,31 +446,146 @@ class _BuildingDetailScreenState extends State<BuildingDetailScreen>
                     ),
                   )
                   : null,
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              builder:
+                  (context) => Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          f.name,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (f.title != null) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            f.title!,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                        if (f.department != null) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            f.department!,
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        ],
+                        const SizedBox(height: 20),
+                        if (f.email != null && f.email!.isNotEmpty)
+                          ListTile(
+                            leading: const Icon(
+                              Icons.email,
+                              color: Color(0xFFD44500),
+                            ),
+                            title: Text(f.email!),
+                            subtitle: const Text('Send email'),
+                            onTap: () async {
+                              final url = Uri.parse('mailto:${f.email}');
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url);
+                              }
+                              Navigator.pop(context);
+                            },
+                          ),
+                        if (f.phone != null && f.phone!.isNotEmpty)
+                          ListTile(
+                            leading: const Icon(
+                              Icons.phone,
+                              color: Colors.green,
+                            ),
+                            title: Text(f.phone!),
+                            subtitle: const Text('Call'),
+                            onTap: () async {
+                              final url = Uri.parse('tel:${f.phone}');
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url);
+                              }
+                              Navigator.pop(context);
+                            },
+                          ),
+                        if (f.officeRoom != null)
+                          ListTile(
+                            leading: const Icon(Icons.room, color: Colors.blue),
+                            title: Text('Office: ${f.officeRoom}'),
+                            subtitle: const Text('Room location'),
+                          ),
+                        const SizedBox(height: 8),
+                      ],
+                    ),
+                  ),
+            );
+          },
         );
       },
     );
   }
 
   Widget _buildRoomsTab() {
-    return ListView.separated(
-      padding: const EdgeInsets.all(16),
-      itemCount: widget.building.rooms.length,
-      separatorBuilder: (_, __) => const Divider(),
-      itemBuilder: (context, index) {
-        final r = widget.building.rooms[index];
-        return ListTile(
-          leading: Icon(_getRoomIcon(r.type), color: Colors.grey[700]),
-          title: Text(r.name ?? 'Room ${r.number}'),
-          subtitle: Text('Room ${r.number} • Floor ${r.floor ?? "N/A"}'),
-          trailing:
-              r.capacity != null
-                  ? Text(
-                    '${r.capacity} seats',
-                    style: const TextStyle(color: Colors.grey),
-                  )
-                  : null,
-        );
-      },
+    return Column(
+      children: [
+        if (widget.building.reserveRoomUrl != null)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () async {
+                  final url = Uri.parse(widget.building.reserveRoomUrl!);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  }
+                },
+                icon: const Icon(Icons.event_available, color: Colors.white),
+                label: const Text(
+                  'Reserve a Study Room',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        Expanded(
+          child: ListView.separated(
+            padding: const EdgeInsets.all(16),
+            itemCount: widget.building.rooms.length,
+            separatorBuilder: (_, __) => const Divider(),
+            itemBuilder: (context, index) {
+              final r = widget.building.rooms[index];
+              return ListTile(
+                leading: Icon(_getRoomIcon(r.type), color: Colors.grey[700]),
+                title: Text(r.name ?? 'Room ${r.number}'),
+                subtitle: Text('Room ${r.number} • Floor ${r.floor ?? "N/A"}'),
+                trailing:
+                    r.capacity != null
+                        ? Text(
+                          '${r.capacity} seats',
+                          style: const TextStyle(color: Colors.grey),
+                        )
+                        : null,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 

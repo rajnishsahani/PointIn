@@ -7,21 +7,32 @@
     "longitude": -76.136140,
     "address": "200 Eggers Hall, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "Home to the Maxwell School of Citizenship and Public Affairs, consistently ranked the #1 school for public affairs in the United States.",
+    "description": "Home to the Maxwell School of Citizenship and Public Affairs, consistently ranked the #1 school for public affairs in the United States. With 180 faculty members, 500 graduate students and 2,000 undergraduate majors, Maxwell is dedicated to research and teaching excellence.",
     "constructionYear": 1937,
     "architect": "Dwight James Baum",
     "architecturalStyle": "Colonial Revival",
-    "notableEvents": ["Named after George Holmes Maxwell, Class of 1874", "Houses the #1 ranked public affairs program", "Major renovation completed in 2018"],
-    "departments": ["Public Administration", "Political Science", "Economics", "International Relations"],
+    "notableEvents": [
+      "Named after George Holmes Maxwell, Class of 1874",
+      "Houses the #1 ranked public affairs program (U.S. News & World Report)",
+      "Major renovation completed in 2018",
+      "Established in 1924 to teach citizenship to all SU undergraduates"
+    ],
+    "departments": ["Public Administration & International Affairs", "Political Science", "Economics", "International Relations", "Sociology", "Geography", "History", "Anthropology"],
     "campusRegion": "Main Quad",
     "faculty": [
-      {"name": "Dr. David Van Slyke", "title": "Dean", "department": "Maxwell School", "officeRoom": "200", "email": "dvanslyke@syr.edu", "phone": "", "imageUrl": ""},
-      {"name": "Dr. Sarah Hamersma", "title": "Associate Dean", "department": "Public Administration", "officeRoom": "215", "email": "shamersm@syr.edu", "phone": "", "imageUrl": ""}
+      {"name": "Dr. David Van Slyke", "title": "Dean, Maxwell School", "department": "Maxwell School", "officeRoom": "200 Eggers", "email": "dvanslyke@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Robert Bifulco", "title": "Professor", "department": "Public Administration & International Affairs", "officeRoom": "Eggers Hall", "email": "rbifulco@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Audie Klotz", "title": "Professor, Heighberger Faculty Fellow", "department": "Political Science", "officeRoom": "Eggers Hall", "email": "aklotz@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Stuart Brown", "title": "Associate Professor, Chair", "department": "Political Science", "officeRoom": "434 Crouse Hinds", "email": "sibretsc@syr.edu", "phone": "315-443-3712", "imageUrl": ""},
+      {"name": "Dr. Sarah Hamersma", "title": "Associate Dean", "department": "Public Administration & International Affairs", "officeRoom": "215 Eggers", "email": "shamersm@syr.edu", "phone": "", "imageUrl": ""}
     ],
     "rooms": [
       {"number": "Auditorium", "name": "Maxwell Auditorium", "type": "auditorium", "floor": 1, "capacity": 280},
       {"number": "200", "name": "Dean's Office", "type": "office", "floor": 2, "capacity": null},
-      {"number": "300A", "name": "Seminar Room", "type": "classroom", "floor": 3, "capacity": 30}
+      {"number": "215", "name": "Associate Dean's Office", "type": "office", "floor": 2, "capacity": null},
+      {"number": "300A", "name": "Seminar Room", "type": "classroom", "floor": 3, "capacity": 30},
+      {"number": "341", "name": "Large Classroom", "type": "classroom", "floor": 3, "capacity": 60},
+      {"number": "100", "name": "Atrium Lounge", "type": "other", "floor": 1, "capacity": 50}
     ]
   },
   {
@@ -32,19 +43,29 @@
     "longitude": -76.134827,
     "address": "Syracuse University, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "The spiritual heart of Syracuse University, serving as a non-sectarian chapel and gathering place since 1930.",
+    "description": "The spiritual heart of Syracuse University, serving as a non-sectarian chapel and gathering place since 1930. Hosts over 600 events annually including weddings, memorial services, concerts, and interfaith programs.",
     "constructionYear": 1930,
     "architect": "Dwight James Baum",
     "architecturalStyle": "Colonial Revival with Georgian elements",
-    "notableEvents": ["Martin Luther King Jr. spoke here in 1961", "Memorial services for Pan Am Flight 103 (1988 Lockerbie bombing)", "Named for benefactor Francis Hendricks"],
-    "departments": ["Chaplaincy", "Interfaith Programs"],
+    "notableEvents": [
+      "Martin Luther King Jr. spoke here in 1961",
+      "Memorial services for Pan Am Flight 103 victims (1988 Lockerbie bombing)",
+      "Named for benefactor Francis Hendricks, former NY Lieutenant Governor",
+      "Dean Brian Konkol departed January 2026 to become president of Valparaiso University"
+    ],
+    "departments": ["Chaplaincy", "Interfaith Programs", "Community Engagement"],
     "campusRegion": "Main Quad",
     "faculty": [
-      {"name": "Rev. Brian Konkol", "title": "Dean of Hendricks Chapel", "department": "Chaplaincy", "officeRoom": "Main Office", "email": "bkonkol@syr.edu", "phone": "", "imageUrl": ""}
+      {"name": "Rev. Brian Konkol", "title": "Former Dean (departed Jan 2026)", "department": "Chaplaincy", "officeRoom": "Main Office", "email": "bkonkol@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Syeda Aisha Hamdani", "title": "Muslim Chaplain", "department": "Interfaith Programs", "officeRoom": "Lower Level", "email": "", "phone": "", "imageUrl": ""},
+      {"name": "Rabbi David Katz", "title": "Jewish Chaplain", "department": "Interfaith Programs", "officeRoom": "Lower Level", "email": "", "phone": "", "imageUrl": ""}
     ],
     "rooms": [
       {"number": "Main Hall", "name": "Main Sanctuary", "type": "auditorium", "floor": 1, "capacity": 1000},
-      {"number": "Noble Room", "name": "Noble Room", "type": "classroom", "floor": 1, "capacity": 60}
+      {"number": "Noble Room", "name": "Noble Room", "type": "classroom", "floor": 1, "capacity": 60},
+      {"number": "Strates Room", "name": "Strates Lounge", "type": "other", "floor": 1, "capacity": 40},
+      {"number": "Lower Level", "name": "Peoples' Place & Alibrandi Center", "type": "other", "floor": 0, "capacity": 80},
+      {"number": "Chapel Office", "name": "Dean's Office Suite", "type": "office", "floor": 1, "capacity": null}
     ]
   },
   {
@@ -55,16 +76,25 @@
     "longitude": -76.136352,
     "address": "900 Irving Ave, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "The largest domed stadium on a college campus, home to Syracuse Orange football, basketball, and lacrosse.",
+    "description": "The largest domed stadium on a college campus, home to Syracuse Orange football, basketball, and lacrosse. The $118 million roof renovation completed in 2022 replaced the original inflatable Teflon roof with a fixed steel and ETFE crown truss structure.",
     "constructionYear": 1980,
-    "architect": "Hueber-Hares-Glavin Partnership",
-    "architecturalStyle": "Fixed roof dome (renovated 2022)",
-    "notableEvents": ["Originally named Carrier Dome (1980-2022)", "Renamed JMA Wireless Dome in 2022", "$118 million roof renovation completed 2022"],
-    "departments": ["Athletics"],
+    "architect": "Hueber-Hares-Glavin Partnership (original); Populous (2022 renovation)",
+    "architecturalStyle": "Fixed crown truss dome (renovated 2022)",
+    "notableEvents": [
+      "Originally named Carrier Dome (1980-2022)",
+      "Renamed JMA Wireless Dome in September 2022",
+      "$118 million roof renovation completed 2022",
+      "Record attendance: 35,446 for basketball (2019 vs. Duke)"
+    ],
+    "departments": ["Athletics", "Event Management"],
     "campusRegion": "South Campus",
     "faculty": [],
     "rooms": [
-      {"number": "Main Floor", "name": "Stadium Floor", "type": "auditorium", "floor": 1, "capacity": 49262}
+      {"number": "Main Floor", "name": "Stadium Floor", "type": "auditorium", "floor": 1, "capacity": 49262},
+      {"number": "Press Box", "name": "Media Press Box", "type": "office", "floor": 5, "capacity": 150},
+      {"number": "Melo Center", "name": "Carmelo K. Anthony Center", "type": "other", "floor": 1, "capacity": 500},
+      {"number": "Club Level", "name": "Club Seating", "type": "other", "floor": 3, "capacity": 3000},
+      {"number": "Locker Rooms", "name": "Team Locker Rooms", "type": "other", "floor": 1, "capacity": 80}
     ]
   },
   {
@@ -75,17 +105,34 @@
     "longitude": -76.132628,
     "address": "222 Waverly Ave, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "The main library of Syracuse University, housing over 4 million volumes and serving as a central study space.",
+    "description": "The main library of Syracuse University, housing over 4 million volumes across 7 floors and 227,249 square feet. The busiest academic building on campus, Bird Library is a central hub for study, research, and collaboration.",
     "constructionYear": 1972,
     "architect": "King & King Architects",
     "architecturalStyle": "Brutalist",
-    "notableEvents": ["Named after Ernest S. Bird, SU benefactor", "Houses Special Collections Research Center", "Major interior renovation in 2010s"],
-    "departments": ["Syracuse University Libraries"],
+    "notableEvents": [
+      "Named after Ernest S. Bird, SU benefactor",
+      "Houses Special Collections Research Center on 6th floor",
+      "Major interior renovation in 2010s added Learning Commons",
+      "Federal Depository Library for over 140 years",
+      "Pages cafe located on 1st floor"
+    ],
+    "departments": ["Syracuse University Libraries", "Special Collections Research Center", "University Archives"],
     "campusRegion": "Main Quad",
+    "reserveRoomUrl": "https://syr.libcal.com/spaces?lid=1473&gid=4907&c=0",
     "faculty": [],
     "rooms": [
-      {"number": "1st Floor", "name": "Learning Commons", "type": "classroom", "floor": 1, "capacity": 300},
-      {"number": "6th Floor", "name": "Special Collections", "type": "office", "floor": 6, "capacity": 30}
+      {"number": "1st Floor", "name": "Learning Commons", "type": "classroom", "floor": 1, "capacity": 200},
+      {"number": "114", "name": "Blackstone LaunchPad", "type": "other", "floor": 1, "capacity": 40},
+      {"number": "Pages Cafe", "name": "Pages Cafe", "type": "other", "floor": 1, "capacity": 30},
+      {"number": "Lower Level", "name": "Quiet Reading Room & ETC", "type": "classroom", "floor": 0, "capacity": 200},
+      {"number": "2nd Floor", "name": "Quiet Study & Workstations", "type": "classroom", "floor": 2, "capacity": 20},
+      {"number": "3rd Floor", "name": "Government Publications & Map Room", "type": "classroom", "floor": 3, "capacity": 33},
+      {"number": "315", "name": "Sensory Friendly Study Room", "type": "classroom", "floor": 3, "capacity": 1},
+      {"number": "318", "name": "Prayer & Meditation Room", "type": "other", "floor": 3, "capacity": 3},
+      {"number": "4th Floor", "name": "Biblio Gallery & Digital Scholarship Space", "type": "lab", "floor": 4, "capacity": 50},
+      {"number": "5th Floor", "name": "Mower Faculty Commons & CTL", "type": "office", "floor": 5, "capacity": 87},
+      {"number": "6th Floor", "name": "Special Collections Research Center", "type": "office", "floor": 6, "capacity": 30},
+      {"number": "610", "name": "Robert Ortwine Exhibition Gallery", "type": "other", "floor": 6, "capacity": 12}
     ]
   },
   {
@@ -96,19 +143,36 @@
     "longitude": -76.135846,
     "address": "215 University Pl, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "One of the premier communications schools in the nation, known for journalism, television, advertising, and public relations.",
+    "description": "One of the premier communications schools in the nation, known for journalism, television, advertising, and public relations. Comprises three buildings: Newhouse I (designed by I.M. Pei), Newhouse II, and Newhouse III. Home to approximately 2,400 students and 200 faculty and staff.",
     "constructionYear": 1964,
     "architect": "I.M. Pei (Newhouse I), Polshek Partnership (Newhouse II), Toshiko Mori (Newhouse III)",
     "architecturalStyle": "Modern / Contemporary",
-    "notableEvents": ["Newhouse I designed by I.M. Pei, opened 1964", "Newhouse III opened 2014", "Alumni include Bob Costas, Ted Koppel, Mike Tirico"],
-    "departments": ["Journalism", "Television-Radio-Film", "Advertising", "Public Relations"],
+    "notableEvents": [
+      "Newhouse I designed by I.M. Pei, opened 1964",
+      "Newhouse III opened 2014 with state-of-the-art studios",
+      "Alumni include Bob Costas, Ted Koppel, Mike Tirico",
+      "Accredited by ACEJMC"
+    ],
+    "departments": ["Journalism", "Television-Radio-Film", "Advertising", "Public Relations", "Magazine, News & Digital Journalism", "Public Diplomacy"],
     "campusRegion": "South Campus",
     "faculty": [
-      {"name": "Dr. Mark Lodato", "title": "Dean", "department": "Newhouse School", "officeRoom": "Newhouse III", "email": "mlodato@syr.edu", "phone": "", "imageUrl": ""}
+      {"name": "Dr. Mark Lodato", "title": "Dean, Newhouse School", "department": "Newhouse School", "officeRoom": "Newhouse III", "email": "mlodato@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Tula Goenka", "title": "Professor, Faculty Board Representative", "department": "Television, Radio & Film", "officeRoom": "Newhouse II", "email": "tgoenka@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dan Pacheco", "title": "Horvitz Endowed Chair in Journalism Innovation", "department": "Magazine, News & Digital Journalism", "officeRoom": "Newhouse III", "email": "dpacheco@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Adam Peruta", "title": "Associate Professor, Dir. Advanced Media Management", "department": "Magazine, News & Digital Journalism", "officeRoom": "Newhouse III", "email": "aperuta@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Steven Pike", "title": "Associate Professor, Dir. Public Diplomacy Program", "department": "Public Relations", "officeRoom": "Newhouse II", "email": "spike@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "James Tsao", "title": "Professor, Chair of Advertising", "department": "Advertising", "officeRoom": "Newhouse I", "email": "jtsao@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Olivia Stomski", "title": "Director, Newhouse Sports Media Center", "department": "Television, Radio & Film", "officeRoom": "Newhouse III", "email": "ostomski@syr.edu", "phone": "", "imageUrl": ""}
     ],
     "rooms": [
       {"number": "Hergenhan Auditorium", "name": "Hergenhan Auditorium", "type": "auditorium", "floor": 1, "capacity": 340},
-      {"number": "Studio A", "name": "Television Studio A", "type": "lab", "floor": 1, "capacity": 50}
+      {"number": "Studio A", "name": "Television Studio A", "type": "lab", "floor": 1, "capacity": 50},
+      {"number": "Studio B", "name": "Television Studio B", "type": "lab", "floor": 1, "capacity": 30},
+      {"number": "316", "name": "Undergraduate Advising Office", "type": "office", "floor": 3, "capacity": 10},
+      {"number": "Dean's Suite", "name": "Dean's Office", "type": "office", "floor": 3, "capacity": null},
+      {"number": "Edit Suites", "name": "Digital Editing Labs", "type": "lab", "floor": 2, "capacity": 20},
+      {"number": "Sports Media Center", "name": "Dick Clark Studios & Sports Center", "type": "lab", "floor": 1, "capacity": 40},
+      {"number": "Lobby", "name": "Joyce Hergenhan Lobby", "type": "other", "floor": 1, "capacity": 100}
     ]
   },
   {
@@ -119,16 +183,31 @@
     "longitude": -76.134515,
     "address": "Syracuse University, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "The oldest building on the Syracuse University campus and an iconic symbol of the university.",
+    "description": "The oldest building on the Syracuse University campus, dedicated May 8, 1873. Originally housed the entire university. Made of Onondaga limestone with three iconic towers, it accommodates 2,235 students across classrooms and department offices.",
     "constructionYear": 1873,
     "architect": "Horatio Nelson White",
     "architecturalStyle": "Second Empire / French Renaissance",
-    "notableEvents": ["First building constructed on campus (1871-1873)", "Originally housed the entire university", "Listed on the National Register of Historic Places"],
-    "departments": ["Languages, Literatures & Linguistics", "Philosophy", "Religion"],
+    "notableEvents": [
+      "First building constructed on campus (cornerstone laid August 31, 1871)",
+      "Originally housed the entire university",
+      "Listed on the National Register of Historic Places",
+      "Styled after the Gridley Building in Downtown Syracuse",
+      "Celebrated its 150th anniversary in May 2023"
+    ],
+    "departments": ["English & Textual Studies", "Philosophy", "Religion", "Languages, Literatures & Linguistics"],
     "campusRegion": "Main Quad",
-    "faculty": [],
+    "faculty": [
+      {"name": "Dr. Behzad Mortazavi", "title": "Dean, College of Arts and Sciences", "department": "Arts & Sciences", "officeRoom": "Hall of Languages", "email": "bmortaza@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Karen Doherty", "title": "Senior Associate Dean for Academic Affairs", "department": "Arts & Sciences", "officeRoom": "Hall of Languages", "email": "kdoherty@syr.edu", "phone": "", "imageUrl": ""}
+    ],
     "rooms": [
-      {"number": "107", "name": "Kittredge Auditorium", "type": "auditorium", "floor": 1, "capacity": 240}
+      {"number": "107", "name": "Kittredge Auditorium", "type": "auditorium", "floor": 1, "capacity": 240},
+      {"number": "114", "name": "Large Lecture Hall", "type": "classroom", "floor": 1, "capacity": 80},
+      {"number": "207", "name": "Seminar Room", "type": "classroom", "floor": 2, "capacity": 30},
+      {"number": "211", "name": "Philosophy Department Office", "type": "office", "floor": 2, "capacity": null},
+      {"number": "301", "name": "English Department Classroom", "type": "classroom", "floor": 3, "capacity": 35},
+      {"number": "315", "name": "Languages & Linguistics Office", "type": "office", "floor": 3, "capacity": null},
+      {"number": "Dean's Suite", "name": "A&S Dean's Office", "type": "office", "floor": 2, "capacity": null}
     ]
   },
   {
@@ -139,19 +218,32 @@
     "longitude": -76.132480,
     "address": "Syracuse University, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "Home to the College of Engineering and Computer Science, housing classrooms, labs, and research facilities.",
+    "description": "Home to the College of Engineering and Computer Science (ECS), housing classrooms, labs, and research facilities. ECS offers more than 30 programs across four departments with a focus on interdisciplinary innovation.",
     "constructionYear": 1969,
     "architect": "King & King Architects",
     "architecturalStyle": "Brutalist / Modern",
-    "notableEvents": ["Named after Edwin Albert Link, inventor of the Link Trainer flight simulator", "Houses ECS makerspace and senior design labs"],
-    "departments": ["Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering"],
+    "notableEvents": [
+      "Named after Edwin Albert Link, inventor of the Link Trainer flight simulator",
+      "Houses ECS makerspace and senior design labs",
+      "Jennifer Ross appointed Interim Dean in November 2025"
+    ],
+    "departments": ["Electrical Engineering & Computer Science", "Mechanical & Aerospace Engineering", "Civil & Environmental Engineering", "Biomedical & Chemical Engineering"],
     "campusRegion": "South Campus",
     "faculty": [
-      {"name": "Dr. J. Cole Smith", "title": "Dean, College of ECS", "department": "Engineering & Computer Science", "officeRoom": "Link 100", "email": "jcsmith@syr.edu", "phone": "", "imageUrl": ""}
+      {"name": "Dr. Jennifer Ross", "title": "Interim Dean, College of ECS", "department": "Engineering & Computer Science", "officeRoom": "Link Hall", "email": "jlross@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Alex K. Jones", "title": "Department Chair, EECS", "department": "Electrical Engineering & Computer Science", "officeRoom": "CST 4-206", "email": "akjones@syr.edu", "phone": "315-443-2652", "imageUrl": ""},
+      {"name": "Dr. Chilukuri K. Mohan", "title": "Professor", "department": "Electrical Engineering & Computer Science", "officeRoom": "CST", "email": "ckmohan@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Vir V. Phoha", "title": "Professor, Edelstein Chair", "department": "Electrical Engineering & Computer Science", "officeRoom": "CST", "email": "vvphoha@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Jonathan Weissman", "title": "Associate Teaching Professor", "department": "Electrical Engineering & Computer Science", "officeRoom": "CST", "email": "jweisman@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Kristopher Micinski", "title": "Assistant Professor", "department": "Electrical Engineering & Computer Science", "officeRoom": "CST", "email": "kkmicins@syr.edu", "phone": "", "imageUrl": ""}
     ],
     "rooms": [
       {"number": "105", "name": "Large Lecture Hall", "type": "classroom", "floor": 1, "capacity": 150},
-      {"number": "241", "name": "Computer Lab", "type": "lab", "floor": 2, "capacity": 40}
+      {"number": "241", "name": "Computer Lab", "type": "lab", "floor": 2, "capacity": 40},
+      {"number": "Makerspace", "name": "ECS Makerspace", "type": "lab", "floor": 1, "capacity": 30},
+      {"number": "Senior Design Lab", "name": "Senior Design Project Lab", "type": "lab", "floor": 2, "capacity": 25},
+      {"number": "305", "name": "Classroom", "type": "classroom", "floor": 3, "capacity": 50},
+      {"number": "100", "name": "Dean's Office Suite", "type": "office", "floor": 1, "capacity": null}
     ]
   },
   {
@@ -162,16 +254,32 @@
     "longitude": -76.136861,
     "address": "Syracuse University, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "Home to the Setnor School of Music, one of the most iconic and photographed buildings on the SU campus.",
+    "description": "Home to the Setnor School of Music. Syracuse was the first university in the US to grant a four-year music degree (1877). The castle-like building features ten bells rung by student Chimemasters for over 125 years.",
     "constructionYear": 1889,
     "architect": "Archimedes Russell",
     "architecturalStyle": "Romanesque Revival",
-    "notableEvents": ["Named after John Crouse, SU benefactor", "Houses Setnor Auditorium — a 688-seat concert hall", "Listed on the National Register of Historic Places"],
-    "departments": ["Setnor School of Music"],
+    "notableEvents": [
+      "Named after John Crouse, SU benefactor",
+      "Houses Setnor Auditorium with 3,823-pipe Holtkamp Organ",
+      "Listed on the National Register of Historic Places",
+      "Over 200 free performances each year"
+    ],
+    "departments": ["Applied Music & Performance", "Music Composition, Theory & History", "Music Education", "Music Industry & Technologies"],
     "campusRegion": "Main Quad",
-    "faculty": [],
+    "faculty": [
+      {"name": "Milton Laufer", "title": "Director, Setnor School of Music", "department": "Setnor School of Music", "officeRoom": "208 Crouse", "email": "mlaufer@syr.edu", "phone": "315-443-5892", "imageUrl": ""},
+      {"name": "Dr. Wendy Moy", "title": "Associate Professor", "department": "Music Education", "officeRoom": "108A Crouse", "email": "wmoy01@syr.edu", "phone": "315-443-6233", "imageUrl": ""},
+      {"name": "Dr. John Coggiola", "title": "Director of Jazz Studies", "department": "Jazz & Commercial Music", "officeRoom": "Crouse College", "email": "jccoggio@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Marianne Solivan", "title": "Assistant Professor of Jazz Voice", "department": "Jazz & Commercial Music", "officeRoom": "Crouse College", "email": "", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Texu Kim", "title": "Assistant Teaching Professor", "department": "Music Composition & Theory", "officeRoom": "Crouse College", "email": "", "phone": "", "imageUrl": ""}
+    ],
     "rooms": [
-      {"number": "Setnor Auditorium", "name": "Setnor Auditorium", "type": "auditorium", "floor": 1, "capacity": 688}
+      {"number": "Setnor Auditorium", "name": "Rose & Jules R. Setnor Auditorium", "type": "auditorium", "floor": 1, "capacity": 700},
+      {"number": "208", "name": "Director's Office", "type": "office", "floor": 2, "capacity": null},
+      {"number": "308", "name": "Recital Hall", "type": "auditorium", "floor": 3, "capacity": 80},
+      {"number": "Practice Rooms", "name": "Student Practice Rooms", "type": "lab", "floor": 2, "capacity": 1},
+      {"number": "Rehearsal Hall", "name": "Ensemble Rehearsal Space", "type": "classroom", "floor": 1, "capacity": 60},
+      {"number": "Teaching Studios", "name": "Faculty Teaching Studios", "type": "office", "floor": 2, "capacity": 3}
     ]
   },
   {
@@ -182,17 +290,298 @@
     "longitude": -76.133847,
     "address": "303 University Pl, Syracuse, NY 13244",
     "imageUrl": "",
-    "description": "The main student union at Syracuse University, housing dining, student organizations, a bookstore, and event spaces.",
+    "description": "The University's 'living room' and hub of student life. Features a central atrium with a two-story video wall, dining food court, gaming & esports center, campus store, and 300+ student organization offices. Major renovation completed 2019-2021.",
     "constructionYear": 1985,
-    "architect": "King & King Architects",
-    "architecturalStyle": "Postmodern",
-    "notableEvents": ["Named after benefactor Robert B. Schine", "Houses SU Bookstore, Underground dining, movie theater"],
-    "departments": ["Student Affairs", "Student Organizations"],
+    "architect": "Edward Larrabee Barnes (original); Mackey Mitchell Architects (2019 renovation)",
+    "architecturalStyle": "Postmodern with glass lantern atrium",
+    "notableEvents": [
+      "Named after Hildegarde and J. Myer Schine",
+      "Major renovation 2019-2021 with 8,600 sq ft expansion",
+      "Houses Disability Cultural Center, LGBTQ+ Resource Center, Multicultural Affairs",
+      "Home to 300+ registered student organizations"
+    ],
+    "departments": ["Student Engagement", "Student Organizations", "Intercultural Collective", "Gaming & Esports"],
     "campusRegion": "Main Quad",
     "faculty": [],
     "rooms": [
-      {"number": "Underground", "name": "Schine Underground", "type": "other", "floor": 0, "capacity": 200},
-      {"number": "304", "name": "Goldstein Auditorium", "type": "auditorium", "floor": 3, "capacity": 500}
+      {"number": "Goldstein Auditorium", "name": "Goldstein Auditorium", "type": "auditorium", "floor": 3, "capacity": 1500},
+      {"number": "Underground", "name": "The Underground (Performance Space)", "type": "auditorium", "floor": 0, "capacity": 200},
+      {"number": "Atrium", "name": "Central Atrium & Two-Story Video Wall", "type": "other", "floor": 1, "capacity": 300},
+      {"number": "Panda Express", "name": "Panda Express", "type": "other", "floor": 1, "capacity": null},
+      {"number": "CoreLife", "name": "CoreLife Eatery", "type": "other", "floor": 1, "capacity": null},
+      {"number": "Halal Shack", "name": "The Halal Shack", "type": "other", "floor": 1, "capacity": null},
+      {"number": "Tavola 44", "name": "Tavola 44 Pizza", "type": "other", "floor": 1, "capacity": null},
+      {"number": "Biscotti Cafe", "name": "Biscotti Cafe", "type": "other", "floor": 1, "capacity": null},
+      {"number": "Dunkin'", "name": "Dunkin' (with Nitro Cold Brew on Tap)", "type": "other", "floor": 1, "capacity": 20},
+      {"number": "Market", "name": "Campus Store Market (Grab-and-Go)", "type": "other", "floor": 1, "capacity": null},
+      {"number": "Campus Store", "name": "SU Campus Store (Apparel & Books)", "type": "other", "floor": 1, "capacity": 100},
+      {"number": "Esports Center", "name": "Gaming & Esports Center (36 PCs, 6 Consoles, VR)", "type": "lab", "floor": 1, "capacity": 50},
+      {"number": "Nap Room", "name": "Quiet Study & Nap Room", "type": "other", "floor": 2, "capacity": 15},
+      {"number": "Meeting Rooms", "name": "Reservable Meeting Rooms", "type": "classroom", "floor": 2, "capacity": 30},
+      {"number": "Terrace", "name": "Outdoor Terrace", "type": "other", "floor": 1, "capacity": 50},
+      {"number": "Intercultural Collective", "name": "Intercultural Collective (DCC, LGBTQ+, MCA)", "type": "office", "floor": 1, "capacity": null}
+    ]
+  },
+  {
+    "id": "physics_building",
+    "name": "Physics Building",
+    "type": "university",
+    "latitude": 43.0378,
+    "longitude": -76.1310,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "A four-story building with two below-ground levels housing the Department of Physics. Home to cutting-edge research in particle physics, gravitational wave detection, biophysics, and quantum computing.",
+    "constructionYear": 1966,
+    "architect": "King & King Architects",
+    "architecturalStyle": "Modern",
+    "notableEvents": [
+      "Contains the 307-seat Stolkin Auditorium",
+      "Department replaced previous home in Steele Hall",
+      "Active research groups in LIGO gravitational wave detection",
+      "Home to BioInspired Institute researchers"
+    ],
+    "departments": ["Physics", "High Energy Physics", "Gravitational Wave Astronomy", "Biophysics"],
+    "campusRegion": "South Campus",
+    "faculty": [
+      {"name": "Dr. Jay Hubisz", "title": "Professor", "department": "Physics", "officeRoom": "311 Physics", "email": "jhubisz@syr.edu", "phone": "315-443-2653", "imageUrl": ""},
+      {"name": "Dr. Alison Patteson", "title": "Associate Professor of Biophysics", "department": "Physics", "officeRoom": "Physics Building", "email": "arpatter@syr.edu", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Scott Collier", "title": "Assistant Professor", "department": "Physics", "officeRoom": "Physics Building", "email": "", "phone": "", "imageUrl": ""},
+      {"name": "Dr. Caleb Fink", "title": "Assistant Professor", "department": "Physics", "officeRoom": "Physics Building", "email": "", "phone": "", "imageUrl": ""}
+    ],
+    "rooms": [
+      {"number": "Stolkin Auditorium", "name": "Stolkin Auditorium", "type": "auditorium", "floor": 1, "capacity": 307},
+      {"number": "202", "name": "Seminar Room", "type": "classroom", "floor": 2, "capacity": 30},
+      {"number": "225", "name": "Faculty Office (Ross)", "type": "office", "floor": 2, "capacity": null},
+      {"number": "311", "name": "Faculty Office (Hubisz)", "type": "office", "floor": 3, "capacity": null},
+      {"number": "Research Labs", "name": "Experimental Physics Labs", "type": "lab", "floor": 0, "capacity": 20}
+    ]
+  },
+  {
+    "id": "carnegie_library",
+    "name": "Carnegie Library",
+    "type": "university",
+    "latitude": 43.0368,
+    "longitude": -76.1338,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Located on the Shaw Quadrangle, Carnegie Library houses science and technology resources including biology, chemistry, engineering, computer science, geology, mathematics, and physics collections. Features a beautiful historic Reading Room for quiet study.",
+    "constructionYear": 1907,
+    "architect": "Revels & Hallenbeck",
+    "architecturalStyle": "Beaux-Arts / Neoclassical",
+    "notableEvents": [
+      "Funded by Andrew Carnegie with a $150,000 gift",
+      "Originally the main university library until Bird Library opened in 1972",
+      "Historic Reading Room is a popular quiet study space",
+      "Part of the Comstock Tract Buildings National Register Historic District"
+    ],
+    "departments": ["SU Libraries (Science & Technology Branch)"],
+    "campusRegion": "Shaw Quad",
+    "reserveRoomUrl": "https://syr.libcal.com/spaces?lid=1473&gid=4907&c=0",
+    "faculty": [],
+    "rooms": [
+      {"number": "Reading Room", "name": "Historic Reading Room (Quiet Study)", "type": "classroom", "floor": 2, "capacity": 60},
+      {"number": "208", "name": "Computer Workstation Room", "type": "lab", "floor": 2, "capacity": 16},
+      {"number": "Team Rooms", "name": "Reservable Team Study Rooms", "type": "classroom", "floor": 2, "capacity": 6},
+      {"number": "1st Floor", "name": "Science Collections", "type": "other", "floor": 1, "capacity": null}
+    ]
+  },
+  {
+    "id": "lyman_hall",
+    "name": "Lyman Hall",
+    "type": "university",
+    "latitude": 43.0383,
+    "longitude": -76.1330,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Originally named John Lyman Hall of Natural History, built with marble base, brick and Indiana limestone. Now houses administrative offices and the Department of Biology. Also home to Syracuse University Ambulance (lower level).",
+    "constructionYear": 1907,
+    "architect": "Frederick W. Revels & Earl Hallenbeck",
+    "architecturalStyle": "Neoclassical / Beaux-Arts",
+    "notableEvents": [
+      "Named for Mary and Jessie Lyman, daughters of Board of Trustees member John Lyman",
+      "Originally housed Biology, Botany, Geology, Zoology, Psychology, and Geography",
+      "Fourth floor fire in 1937 destroyed Natural History Museum collections",
+      "SU Ambulance relocated to lower level in 2017"
+    ],
+    "departments": ["Biology", "University Administration"],
+    "campusRegion": "Main Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "Lecture Hall", "name": "Biology Lecture Hall", "type": "classroom", "floor": 1, "capacity": 100},
+      {"number": "Labs", "name": "Biology Teaching Labs", "type": "lab", "floor": 2, "capacity": 30},
+      {"number": "Lower Level", "name": "SU Ambulance Base", "type": "other", "floor": 0, "capacity": null}
+    ]
+  },
+  {
+    "id": "sims_hall",
+    "name": "Sims Hall",
+    "type": "university",
+    "latitude": 43.0370,
+    "longitude": -76.1345,
+    "address": "130 College Pl, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Houses the Department of Public Safety (campus police) and the iSchool (School of Information Studies). Located adjacent to the Barnes Center and the engineering quad.",
+    "constructionYear": 1904,
+    "architect": "Revels & Hallenbeck",
+    "architecturalStyle": "Neoclassical",
+    "notableEvents": [
+      "Houses Syracuse University Department of Public Safety",
+      "Also contains School of Information Studies (iSchool) spaces",
+      "Part of the Comstock Tract Buildings Historic District"
+    ],
+    "departments": ["Department of Public Safety", "School of Information Studies (iSchool)"],
+    "campusRegion": "Shaw Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "DPS Office", "name": "Department of Public Safety", "type": "office", "floor": 1, "capacity": null},
+      {"number": "Classrooms", "name": "iSchool Classrooms", "type": "classroom", "floor": 2, "capacity": 40}
+    ]
+  },
+  {
+    "id": "barnes_center",
+    "name": "Barnes Center at The Arch",
+    "type": "mixed",
+    "latitude": 43.0365,
+    "longitude": -76.1355,
+    "address": "150 Sims Dr, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Syracuse University's state-of-the-art health and wellness center, built within the renovated Archbold Gymnasium. Named to the Princeton Review 2026 Mental Health Services Honor Roll. Consolidates fitness, health services, counseling, recreation, and esports under one roof.",
+    "constructionYear": 1908,
+    "architect": "Original: Archbold Gymnasium; Renovated 2019",
+    "architecturalStyle": "Renovated Historic Gymnasium",
+    "notableEvents": [
+      "Originally Archbold Gymnasium, built 1908",
+      "Multi-million dollar renovation completed 2019",
+      "Named to Princeton Review 2026 Mental Health Services Honor Roll",
+      "AAAHC Reaccredited for student-focused care"
+    ],
+    "departments": ["Health Services", "Counseling", "Recreation", "Wellness Programs", "Fitness"],
+    "campusRegion": "Shaw Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "Fitness Center", "name": "Multi-Floor Fitness Center", "type": "other", "floor": 1, "capacity": 200},
+      {"number": "023", "name": "48-Foot Rock Climbing Walls (x2)", "type": "other", "floor": 0, "capacity": 20},
+      {"number": "031", "name": "Free Weight Room", "type": "other", "floor": 0, "capacity": 40},
+      {"number": "Pool", "name": "Swimming Pools (x2)", "type": "other", "floor": 0, "capacity": 50},
+      {"number": "Multi-Court", "name": "Multi-Activity Sports Court", "type": "other", "floor": 1, "capacity": 100},
+      {"number": "Esports Room", "name": "Esports Gaming Room (36 PCs, VR, Consoles)", "type": "lab", "floor": 1, "capacity": 50},
+      {"number": "105A", "name": "MindSpa Room 1 (Sand Garden, Relaxation)", "type": "other", "floor": 1, "capacity": 1},
+      {"number": "105B", "name": "MindSpa Room 2 (Massage Chair)", "type": "other", "floor": 1, "capacity": 1},
+      {"number": "Health Services", "name": "Health Services & Pharmacy", "type": "office", "floor": 2, "capacity": null},
+      {"number": "Counseling", "name": "Counseling Center", "type": "office", "floor": 2, "capacity": null},
+      {"number": "Outdoor Rentals", "name": "Camping & Outdoor Gear Rentals", "type": "other", "floor": 1, "capacity": null}
+    ]
+  },
+  {
+    "id": "whitman_school",
+    "name": "Whitman School of Management",
+    "type": "university",
+    "latitude": 43.0421,
+    "longitude": -76.1341,
+    "address": "721 University Ave, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "The Martin J. Whitman School of Management is Syracuse University's business school, established in 1919. Offers bachelor's, master's, MBA, and doctoral programs in accounting, finance, entrepreneurship, marketing, and supply chain management.",
+    "constructionYear": 1990,
+    "architect": "Kallmann McKinnell & Wood",
+    "architecturalStyle": "Modern / Postmodern",
+    "notableEvents": [
+      "Named after Martin J. Whitman, alumnus and benefactor",
+      "Established in 1919 as the College of Business Administration",
+      "AACSB Accredited",
+      "Alexander McKelvie serving as Interim Dean"
+    ],
+    "departments": ["Accounting", "Finance", "Entrepreneurship & Emerging Enterprises", "Marketing", "Supply Chain Management"],
+    "campusRegion": "North Campus",
+    "faculty": [
+      {"name": "Dr. Alexander McKelvie", "title": "Interim Dean", "department": "Whitman School", "officeRoom": "Whitman Hall", "email": "amckelvi@syr.edu", "phone": "315-443-3751", "imageUrl": ""}
+    ],
+    "rooms": [
+      {"number": "Auditorium", "name": "Whitman Auditorium", "type": "auditorium", "floor": 1, "capacity": 200},
+      {"number": "115", "name": "Career Center", "type": "office", "floor": 1, "capacity": null},
+      {"number": "Classrooms", "name": "Tiered Lecture Classrooms", "type": "classroom", "floor": 2, "capacity": 80},
+      {"number": "Trading Room", "name": "Ballentine Investment Institute Trading Room", "type": "lab", "floor": 1, "capacity": 30},
+      {"number": "Student Lounge", "name": "Student Commons & Lounge", "type": "other", "floor": 1, "capacity": 60}
+    ]
+  },
+  {
+    "id": "life_sciences_complex",
+    "name": "Life Sciences Complex",
+    "type": "university",
+    "latitude": 43.0362,
+    "longitude": -76.1300,
+    "address": "107 College Pl, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "A state-of-the-art research facility housing biology, biochemistry, and neuroscience research labs. One of the newest and most advanced research buildings on campus with modern wet labs and collaborative spaces.",
+    "constructionYear": 2008,
+    "architect": "Bohlin Cywinski Jackson",
+    "architecturalStyle": "Contemporary / High-Tech",
+    "notableEvents": [
+      "Cost approximately $98.6 million to construct",
+      "Houses the Department of Biology research labs",
+      "LEED-designed sustainable building",
+      "Contains advanced microscopy and imaging facilities"
+    ],
+    "departments": ["Biology (Research)", "Biochemistry", "Neuroscience"],
+    "campusRegion": "South Campus",
+    "faculty": [],
+    "rooms": [
+      {"number": "Research Labs", "name": "Wet Research Laboratories", "type": "lab", "floor": 1, "capacity": 20},
+      {"number": "Imaging Suite", "name": "Microscopy & Imaging Facility", "type": "lab", "floor": 2, "capacity": 10},
+      {"number": "Seminar Room", "name": "Research Seminar Room", "type": "classroom", "floor": 1, "capacity": 50},
+      {"number": "Atrium", "name": "Central Atrium & Collaboration Space", "type": "other", "floor": 1, "capacity": 40}
+    ]
+  },
+  {
+    "id": "center_science_technology",
+    "name": "Center for Science and Technology",
+    "type": "university",
+    "latitude": 43.0374,
+    "longitude": -76.1310,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "A large multi-department science building housing the EECS department offices, chemistry labs, mathematics classrooms, and computer science facilities. Connected to Link Hall and the engineering complex.",
+    "constructionYear": 1989,
+    "architect": "King & King Architects",
+    "architecturalStyle": "Modern",
+    "notableEvents": [
+      "Houses the EECS Department main office on 4th floor",
+      "Contains chemistry and computer science teaching labs",
+      "Connected to Link Hall via skybridge"
+    ],
+    "departments": ["Electrical Engineering & Computer Science (Offices)", "Chemistry", "Mathematics"],
+    "campusRegion": "South Campus",
+    "faculty": [],
+    "rooms": [
+      {"number": "4-206", "name": "EECS Department Office", "type": "office", "floor": 4, "capacity": null},
+      {"number": "Chemistry Labs", "name": "Chemistry Teaching Labs", "type": "lab", "floor": 2, "capacity": 30},
+      {"number": "Computer Labs", "name": "CS Computer Labs", "type": "lab", "floor": 3, "capacity": 40},
+      {"number": "Lecture Halls", "name": "Large Lecture Halls", "type": "classroom", "floor": 1, "capacity": 150}
+    ]
+  },
+  {
+    "id": "eggers_hall",
+    "name": "Eggers Hall",
+    "type": "university",
+    "latitude": 43.0385,
+    "longitude": -76.1358,
+    "address": "Syracuse University, Syracuse, NY 13244",
+    "imageUrl": "",
+    "description": "Connected to Maxwell Hall, Eggers Hall houses additional Maxwell School faculty offices, classrooms, and the computing labs. Also home to the Center for Policy Research.",
+    "constructionYear": 1971,
+    "architect": "King & King Architects",
+    "architecturalStyle": "Brutalist / Modern",
+    "notableEvents": [
+      "Named after Melvin A. Eggers, former SU Chancellor (1971-1991)",
+      "Houses Center for Policy Research",
+      "Connected to Maxwell Hall forming the Maxwell complex"
+    ],
+    "departments": ["Maxwell School (Faculty Offices)", "Center for Policy Research"],
+    "campusRegion": "Main Quad",
+    "faculty": [],
+    "rooms": [
+      {"number": "100", "name": "Large Lecture Hall", "type": "classroom", "floor": 1, "capacity": 120},
+      {"number": "Faculty Offices", "name": "Maxwell Faculty Offices", "type": "office", "floor": 2, "capacity": null},
+      {"number": "Computer Lab", "name": "Maxwell Computing Lab", "type": "lab", "floor": 1, "capacity": 35}
     ]
   },
   {
@@ -203,11 +592,15 @@
     "longitude": -76.1724,
     "address": "9090 Destiny USA Dr, Syracuse, NY 13204",
     "imageUrl": "",
-    "description": "The largest shopping and entertainment complex in New York State, featuring over 250 stores, restaurants, and entertainment venues.",
+    "description": "The largest shopping and entertainment complex in New York State, featuring over 250 stores, restaurants, and entertainment venues including a movie theater, go-karts, ropes course, and WonderWorks.",
     "constructionYear": 1990,
     "architect": "The Pyramid Companies",
     "architecturalStyle": "Commercial / Mixed-Use Mall",
-    "notableEvents": ["Originally opened as Carousel Center in 1990", "Expanded and renamed Destiny USA in 2012"],
+    "notableEvents": [
+      "Originally opened as Carousel Center in 1990",
+      "Expanded and renamed Destiny USA in 2012",
+      "Contains WonderWorks, Pole Position Raceway, and Canyon Climb"
+    ],
     "departments": [],
     "campusRegion": null,
     "faculty": [],

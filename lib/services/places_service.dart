@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:http/http.dart' as http;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlacesService {
   final String apiKey;
@@ -58,6 +59,106 @@ class PlacesService {
       print('Places API error: $e');
     }
     return [];
+  }
+
+  /// Fetch walking route polyline from Google Directions API
+  Future<List<LatLng>> getWalkingRoute(
+    double originLat,
+    double originLng,
+    double destLat,
+    double destLng,
+  ) async {
+    final url = Uri.parse(
+      'https://maps.googleapis.com/maps/api/directions/json'
+      '?origin=$originLat,$originLng'
+      '&destination=$destLat,$destLng'
+      '&mode=walking'
+      '&key=$apiKey',
+    );
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['routes'] != null && data['routes'].isNotEmpty) {
+          final encodedPolyline =
+              data['routes'][0]['overview_polyline']['points'];
+          return _decodePolyline(encodedPolyline);
+        }
+      }
+    } catch (e) {
+      print('Directions API error: $e');
+    }
+    return [];
+  }
+
+  /// Search for a building by name near given coordinates and return its photo URL
+  Future<String?> getBuildingPhoto(
+    String buildingName,
+    double latitude,
+    double longitude, {
+    int maxWidth = 800,
+  }) async {
+    final url = Uri.parse(
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+      '?location=$latitude,$longitude'
+      '&radius=200'
+      '&keyword=${Uri.encodeComponent(buildingName)}'
+      '&key=$apiKey',
+    );
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final results = data['results'] as List<dynamic>;
+        if (results.isNotEmpty) {
+          final photos = results[0]['photos'] as List<dynamic>?;
+          if (photos != null && photos.isNotEmpty) {
+            final photoRef = photos[0]['photo_reference'] as String;
+            return 'https://maps.googleapis.com/maps/api/place/photo'
+                '?maxwidth=$maxWidth'
+                '&photo_reference=$photoRef'
+                '&key=$apiKey';
+          }
+        }
+      }
+    } catch (e) {
+      print('Places photo error: $e');
+    }
+    return null;
+  }
+
+  /// Decode Google's encoded polyline string into LatLng points
+  List<LatLng> _decodePolyline(String encoded) {
+    List<LatLng> points = [];
+    int index = 0;
+    int lat = 0;
+    int lng = 0;
+
+    while (index < encoded.length) {
+      int shift = 0;
+      int result = 0;
+      int b;
+      do {
+        b = encoded.codeUnitAt(index++) - 63;
+        result |= (b & 0x1F) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      lat += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+      shift = 0;
+      result = 0;
+      do {
+        b = encoded.codeUnitAt(index++) - 63;
+        result |= (b & 0x1F) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      lng += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+      points.add(LatLng(lat / 1E5, lng / 1E5));
+    }
+    return points;
   }
 }
 

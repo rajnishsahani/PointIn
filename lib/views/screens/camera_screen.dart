@@ -11,10 +11,12 @@ import '../../services/places_service.dart';
 import '../../utils/helpers.dart';
 import '../../utils/constants.dart';
 import 'building_detail_screen.dart';
+import 'package:flutter_compass/flutter_compass.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({super.key});
-
+  final Building? navigationTarget;
+  const CameraScreen({super.key, this.navigationTarget});
   @override
   State<CameraScreen> createState() => _CameraScreenState();
 }
@@ -42,6 +44,9 @@ class _CameraScreenState extends State<CameraScreen>
   // AR navigation state
   NearbyPlace? _navigationTarget;
   Position? _currentPosition;
+  GoogleMapController? _miniMapController;
+  List<LatLng> _routePoints = [];
+  double _miniMapZoom = 16;
 
   @override
   void initState() {
@@ -91,6 +96,14 @@ class _CameraScreenState extends State<CameraScreen>
   void _startLocationUpdates() async {
     final hasPermission = await _locationService.requestPermission();
     if (!hasPermission) return;
+    // Add this — get initial position immediately
+    final pos = await _locationService.getCurrentPosition();
+    _currentPosition = pos;
+
+    // Auto-start navigation if a building target was passed
+    if (widget.navigationTarget != null) {
+      _startBuildingNavigation();
+    }
 
     _locationService.getPositionStream().listen((position) async {
       _currentPosition = position;
@@ -127,6 +140,49 @@ class _CameraScreenState extends State<CameraScreen>
     });
   }
 
+  Future<void> _startBuildingNavigation() async {
+    final building = widget.navigationTarget;
+    if (building == null || _currentPosition == null) return;
+
+    final distance = Helpers.calculateDistance(
+      _currentPosition!.latitude,
+      _currentPosition!.longitude,
+      building.latitude,
+      building.longitude,
+    );
+
+    // Convert Building to NearbyPlace so the AR navigation works
+    final targetPlace = NearbyPlace(
+      placeId: building.id,
+      name: building.name,
+      rating: null,
+      totalRatings: null,
+      vicinity: building.address,
+      isOpen: null,
+      types: [building.type.name],
+      photoUrl: null,
+      latitude: building.latitude,
+      longitude: building.longitude,
+      priceLevel: null,
+      distanceMeters: distance,
+    );
+
+    // Fetch walking route
+    final points = await _placesService.getWalkingRoute(
+      _currentPosition!.latitude,
+      _currentPosition!.longitude,
+      building.latitude,
+      building.longitude,
+    );
+
+    if (mounted) {
+      setState(() {
+        _navigationTarget = targetPlace;
+        _routePoints = points;
+      });
+    }
+  }
+
   Future<void> _loadNearbyPlaces() async {
     setState(() => _placesLoading = true);
 
@@ -134,7 +190,7 @@ class _CameraScreenState extends State<CameraScreen>
     final places = await _placesService.getNearbyPlaces(
       position.latitude,
       position.longitude,
-      radius: 3200,
+      radius: 5000,
       category: _selectedCategory,
     );
 
@@ -179,10 +235,23 @@ class _CameraScreenState extends State<CameraScreen>
                 _sortPlaces();
               });
             },
-            onPlaceSelected: (place) {
+
+            onPlaceSelected: (place) async {
               Navigator.pop(context);
               setState(() => _navigationTarget = place);
+
+              // Fetch real walking route
+              final points = await _placesService.getWalkingRoute(
+                _currentPosition!.latitude,
+                _currentPosition!.longitude,
+                place.latitude,
+                place.longitude,
+              );
+              setState(() {
+                _routePoints = points;
+              });
             },
+
             onDirections: (place) async {
               final url = Uri.parse(
                 'https://www.google.com/maps/dir/?api=1&destination=${place.latitude},${place.longitude}&travelmode=walking',
@@ -204,6 +273,14 @@ class _CameraScreenState extends State<CameraScreen>
     final x =
         cos(lat1Rad) * sin(lat2Rad) - sin(lat1Rad) * cos(lat2Rad) * cos(dLon);
     return (atan2(y, x) * 180 / pi + 360) % 360;
+  }
+
+  double _getZoomForDistance(double meters) {
+    if (meters > 5000) return 12;
+    if (meters > 2000) return 13;
+    if (meters > 1000) return 14;
+    if (meters > 500) return 15;
+    return 16;
   }
 
   @override
@@ -292,7 +369,12 @@ class _CameraScreenState extends State<CameraScreen>
                 ),
                 if (_navigationTarget != null)
                   GestureDetector(
-                    onTap: () => setState(() => _navigationTarget = null),
+                    onTap:
+                        () => setState(() {
+                          _navigationTarget = null;
+                          _routePoints = [];
+                          _miniMapZoom = 16;
+                        }),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
@@ -442,87 +524,474 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   Widget _buildNavigationOverlay() {
-    final bearing = _calculateBearing(
-      _currentPosition!.latitude,
-      _currentPosition!.longitude,
-      _navigationTarget!.latitude,
-      _navigationTarget!.longitude,
-    );
+    // Set initial zoom based on distance
+    if (_miniMapZoom == 16 && _navigationTarget != null) {
+      _miniMapZoom = _getZoomForDistance(_navigationTarget!.distanceMeters);
+    }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
       children: [
-        // Direction arrow
-        Transform.rotate(
-          angle: bearing * pi / 180,
-          child: const Icon(Icons.navigation, color: Colors.green, size: 80),
-        ),
-        const SizedBox(height: 16),
-        // Distance + name card
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 40),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.7),
-            borderRadius: BorderRadius.circular(16),
-          ),
+        // GTA-style live mini-map
+        Positioned(
+          top: MediaQuery.of(context).padding.top + 65,
+          right: 16,
           child: Column(
             children: [
-              Text(
-                _navigationTarget!.name,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                _navigationTarget!.distanceString,
-                style: const TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                _navigationTarget!.typeLabel,
-                style: const TextStyle(color: Colors.white70, fontSize: 14),
-              ),
-              const SizedBox(height: 12),
-              GestureDetector(
-                onTap: () async {
-                  final url = Uri.parse(
-                    'https://www.google.com/maps/dir/?api=1&destination=${_navigationTarget!.latitude},${_navigationTarget!.longitude}&travelmode=walking',
-                  );
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url, mode: LaunchMode.externalApplication);
+              StreamBuilder<CompassEvent>(
+                stream: FlutterCompass.events,
+                builder: (context, snapshot) {
+                  double heading = 0;
+                  if (snapshot.hasData && snapshot.data!.heading != null) {
+                    heading = snapshot.data!.heading!;
                   }
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFD44500),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    'Open in Google Maps',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
+
+                  // Update mini-map rotation in real time
+                  if (_miniMapController != null && _currentPosition != null) {
+                    _miniMapController!.moveCamera(
+                      CameraUpdate.newCameraPosition(
+                        CameraPosition(
+                          target: LatLng(
+                            _currentPosition!.latitude,
+                            _currentPosition!.longitude,
+                          ),
+                          zoom: _miniMapZoom,
+                          bearing: heading,
+                        ),
+                      ),
+                    );
+                  }
+
+                  return Container(
+                    width: 170,
+                    height: 170,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color(0xFFD44500),
+                        width: 3,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 10,
+                        ),
+                      ],
                     ),
-                  ),
+                    child: ClipOval(
+                      child: Stack(
+                        children: [
+                          // Live Google Map
+                          SizedBox(
+                            width: 170,
+                            height: 170,
+                            child: GoogleMap(
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(
+                                  _currentPosition!.latitude,
+                                  _currentPosition!.longitude,
+                                ),
+                                zoom: _miniMapZoom,
+                                bearing: heading,
+                              ),
+                              markers: {
+                                Marker(
+                                  markerId: const MarkerId('destination'),
+                                  position: LatLng(
+                                    _navigationTarget!.latitude,
+                                    _navigationTarget!.longitude,
+                                  ),
+                                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                                    BitmapDescriptor.hueRed,
+                                  ),
+                                ),
+                              },
+                              polylines: {
+                                Polyline(
+                                  polylineId: const PolylineId('route'),
+                                  points:
+                                      _routePoints.isNotEmpty
+                                          ? _routePoints
+                                          : [
+                                            LatLng(
+                                              _currentPosition!.latitude,
+                                              _currentPosition!.longitude,
+                                            ),
+                                            LatLng(
+                                              _navigationTarget!.latitude,
+                                              _navigationTarget!.longitude,
+                                            ),
+                                          ],
+                                  color: const Color(0xFF4285F4),
+                                  width: 4,
+                                ),
+                              },
+                              myLocationEnabled: true,
+                              myLocationButtonEnabled: false,
+                              zoomControlsEnabled: false,
+                              mapToolbarEnabled: false,
+                              compassEnabled: false,
+                              scrollGesturesEnabled: false,
+                              zoomGesturesEnabled: false,
+                              rotateGesturesEnabled: false,
+                              tiltGesturesEnabled: false,
+                              liteModeEnabled: false,
+                              onMapCreated: (controller) {
+                                _miniMapController = controller;
+                                controller.animateCamera(
+                                  CameraUpdate.newCameraPosition(
+                                    CameraPosition(
+                                      target: LatLng(
+                                        _currentPosition!.latitude,
+                                        _currentPosition!.longitude,
+                                      ),
+                                      zoom: _miniMapZoom,
+                                      bearing: heading,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+
+                          // Edge fade overlay
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: RadialGradient(
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.3),
+                                ],
+                                stops: const [0.0, 0.75, 1.0],
+                              ),
+                            ),
+                          ),
+
+                          // N indicator
+                          Align(
+                            alignment: const Alignment(0, -0.88),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 1,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: const Text(
+                                'N',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          // Distance badge
+                          Align(
+                            alignment: const Alignment(0, 0.85),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                _navigationTarget!.distanceString,
+                                style: const TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 8),
+
+              // Zoom +/- buttons
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _miniMapZoom = (_miniMapZoom + 1).clamp(10, 20);
+                        });
+                      },
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.white.withOpacity(0.2),
+                            ),
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _miniMapZoom = (_miniMapZoom - 1).clamp(10, 20);
+                        });
+                      },
+                      child: const SizedBox(
+                        width: 36,
+                        height: 36,
+                        child: Icon(
+                          Icons.remove,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
         ),
+
+        // AR Direction Arrow (Google Street View style)
+        Positioned.fill(
+          child: StreamBuilder<CompassEvent>(
+            stream: FlutterCompass.events,
+            builder: (context, snapshot) {
+              double heading = 0;
+              if (snapshot.hasData && snapshot.data!.heading != null) {
+                heading = snapshot.data!.heading!;
+              }
+
+              // Find the next point along the route to guide turn-by-turn
+              double targetLat = _navigationTarget!.latitude;
+              double targetLng = _navigationTarget!.longitude;
+
+              if (_routePoints.length >= 2) {
+                double minDist = double.infinity;
+                int closestIndex = 0;
+                for (int i = 0; i < _routePoints.length; i++) {
+                  final d = Geolocator.distanceBetween(
+                    _currentPosition!.latitude,
+                    _currentPosition!.longitude,
+                    _routePoints[i].latitude,
+                    _routePoints[i].longitude,
+                  );
+                  if (d < minDist) {
+                    minDist = d;
+                    closestIndex = i;
+                  }
+                }
+                final lookAhead = (closestIndex + 8).clamp(
+                  0,
+                  _routePoints.length - 1,
+                );
+                targetLat = _routePoints[lookAhead].latitude;
+                targetLng = _routePoints[lookAhead].longitude;
+              }
+
+              final bearing = _calculateBearing(
+                _currentPosition!.latitude,
+                _currentPosition!.longitude,
+                targetLat,
+                targetLng,
+              );
+
+              final relativeAngle = (bearing - heading) * pi / 180;
+
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100),
+                  child: Transform.rotate(
+                    angle: relativeAngle,
+                    child: CustomPaint(
+                      size: const Size(120, 120),
+                      painter: _ArrowPainter(),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+
+        // Bottom info card
+        Positioned(
+          bottom: 24,
+          left: 16,
+          right: 16,
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.85),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withOpacity(0.1)),
+            ),
+            child: Row(
+              children: [
+                if (_navigationTarget!.photoUrl != null)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      _navigationTarget!.photoUrl!,
+                      width: 56,
+                      height: 56,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => _buildNavIcon(),
+                    ),
+                  )
+                else
+                  _buildNavIcon(),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        _navigationTarget!.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFD44500).withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              _navigationTarget!.typeLabel,
+                              style: const TextStyle(
+                                color: Color(0xFFD44500),
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          if (_navigationTarget!.rating != null) ...[
+                            const SizedBox(width: 8),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 14,
+                            ),
+                            const SizedBox(width: 2),
+                            Text(
+                              '${_navigationTarget!.rating}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.directions_walk,
+                            color: Colors.green,
+                            size: 14,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            _navigationTarget!.distanceString,
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '~${(_navigationTarget!.distanceMeters / 80).round()} min walk',
+                            style: const TextStyle(
+                              color: Colors.white54,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'https://www.google.com/maps/dir/?api=1&destination=${_navigationTarget!.latitude},${_navigationTarget!.longitude}&travelmode=walking',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD44500),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.directions,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
+    );
+  }
+
+  Widget _buildNavIcon() {
+    return Container(
+      width: 56,
+      height: 56,
+      decoration: BoxDecoration(
+        color: const Color(0xFFD44500).withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: const Icon(Icons.place, color: Color(0xFFD44500), size: 28),
     );
   }
 }
@@ -578,7 +1047,7 @@ class _ExploreSheetState extends State<_ExploreSheet> {
     final places = await widget.parentState._placesService.getNearbyPlaces(
       position.latitude,
       position.longitude,
-      radius: 3200,
+      radius: 5000,
       category: _category,
     );
     if (_sort == 'nearest') {
@@ -960,4 +1429,76 @@ class _ExploreSheetState extends State<_ExploreSheet> {
       ),
     );
   }
+}
+
+class _ArrowPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+
+    // Outer glow
+    final glowPaint =
+        Paint()
+          ..color = Colors.white.withOpacity(0.15)
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 20);
+    canvas.drawCircle(center, 55, glowPaint);
+
+    // Semi-transparent circle background
+    final bgPaint =
+        Paint()
+          ..color = Colors.black.withOpacity(0.4)
+          ..style = PaintingStyle.fill;
+    canvas.drawCircle(center, 50, bgPaint);
+
+    // Circle border
+    final borderPaint =
+        Paint()
+          ..color = Colors.white.withOpacity(0.3)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2;
+    canvas.drawCircle(center, 50, borderPaint);
+
+    // Arrow pointing UP (forward direction)
+    final arrowPath = Path();
+    arrowPath.moveTo(center.dx, center.dy - 30); // tip
+    arrowPath.lineTo(center.dx + 22, center.dy + 10); // right
+    arrowPath.lineTo(center.dx + 12, center.dy + 10);
+    arrowPath.lineTo(center.dx + 12, center.dy + 25); // right leg bottom
+    arrowPath.lineTo(center.dx - 12, center.dy + 25); // left leg bottom
+    arrowPath.lineTo(center.dx - 12, center.dy + 10);
+    arrowPath.lineTo(center.dx - 22, center.dy + 10); // left
+    arrowPath.close();
+
+    // Arrow shadow
+    final shadowPaint =
+        Paint()
+          ..color = Colors.black.withOpacity(0.3)
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
+    canvas.save();
+    canvas.translate(2, 2);
+    canvas.drawPath(arrowPath, shadowPaint);
+    canvas.restore();
+
+    // Arrow fill gradient
+    final arrowPaint =
+        Paint()
+          ..shader = const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.white, Color(0xFF90CAF9)],
+          ).createShader(Rect.fromCenter(center: center, width: 60, height: 60))
+          ..style = PaintingStyle.fill;
+    canvas.drawPath(arrowPath, arrowPaint);
+
+    // Arrow border
+    final arrowBorderPaint =
+        Paint()
+          ..color = Colors.white.withOpacity(0.8)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5;
+    canvas.drawPath(arrowPath, arrowBorderPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

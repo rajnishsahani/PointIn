@@ -21,6 +21,7 @@ class Building extends Equatable {
   final List<Room> rooms;
   final List<String> departments;
   final String? campusRegion;
+  final String? reserveRoomUrl;
 
   const Building({
     required this.id,
@@ -39,6 +40,7 @@ class Building extends Equatable {
     this.rooms = const [],
     this.departments = const [],
     this.campusRegion,
+    this.reserveRoomUrl,
   });
 
   // Convert JSON map into a Building object
@@ -72,6 +74,7 @@ class Building extends Equatable {
           [],
       departments: List<String>.from(json['departments'] ?? []),
       campusRegion: json['campusRegion'] as String?,
+      reserveRoomUrl: json['reserveRoomUrl'] as String?,
     );
   }
 
@@ -94,6 +97,7 @@ class Building extends Equatable {
       'rooms': rooms.map((r) => r.toJson()).toList(),
       'departments': departments,
       'campusRegion': campusRegion,
+      'reserveRoomUrl': reserveRoomUrl,
     };
   }
 

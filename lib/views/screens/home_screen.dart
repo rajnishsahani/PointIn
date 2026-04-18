@@ -7,21 +7,32 @@ import 'camera_screen.dart';
 import 'search_screen.dart';
 import 'bookmarks_screen.dart';
 
+// Global key so any screen can access HomeScreenState
+final GlobalKey<HomeScreenState> homeScreenKey = GlobalKey<HomeScreenState>();
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen() : super(key: homeScreenKey);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+  Building? _navigationTarget;
 
-  final List<Widget> _screens = const [
-    MapScreen(),
-    CameraScreen(),
-    SearchScreen(),
+  List<Widget> get _screens => [
+    const MapScreen(),
+    CameraScreen(navigationTarget: _navigationTarget),
+    const SearchScreen(),
   ];
+
+  void navigateToCameraWithTarget(Building building) {
+    setState(() {
+      _navigationTarget = building;
+      _currentIndex = 1;
+    });
+  }
 
   void _showFilterDialog() {
     showModalBottomSheet(
