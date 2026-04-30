@@ -1,0 +1,1307 @@
+{
+  "building": {
+    "name": "Bird Library",
+    "fullName": "E. S. Bird Library",
+    "address": "222 Waverly Ave, Syracuse, NY 13244",
+    "phone": "315-443-2093",
+    "latitude": 43.0398955,
+    "longitude": -76.1326052,
+    "totalFloors": 7,
+    "squareFeet": 227249,
+    "mapNorthBearing": 345,
+    "note": "Map top ≈ true north (345° bearing). Waverly Ave is south side. Einhorn Family Walk exit faces south. Schine Student Center is north."
+  },
+  "orientation": {
+    "description": "Bird Library is oriented with its long axis roughly east-west. The top of every floor map corresponds to approximately true north (campus quad / Schine side). Bottom = south (Waverly Ave). Left = west. Right = east.",
+    "northExit": "EXIT toward campus quad (top of map)",
+    "southExit": "EXIT to Einhorn Family Walk / Waverly Ave (bottom of map)",
+    "eastExit": "EXIT on right side of map",
+    "westExit": "EXIT on left side of map",
+    "mapRotationFromTrueNorth": -15,
+    "compassRanges": {
+      "north": { "min": 330, "max": 30, "label": "North (Campus Quad side)" },
+      "northeast": { "min": 30, "max": 75, "label": "Northeast" },
+      "east": { "min": 75, "max": 120, "label": "East" },
+      "southeast": { "min": 120, "max": 165, "label": "Southeast" },
+      "south": { "min": 165, "max": 210, "label": "South (Waverly Ave side)" },
+      "southwest": { "min": 210, "max": 255, "label": "Southwest" },
+      "west": { "min": 255, "max": 300, "label": "West" },
+      "northwest": { "min": 300, "max": 330, "label": "Northwest" }
+    }
+  },
+  "floors": [
+    {
+      "floorId": "B",
+      "floorName": "Lower Level",
+      "floorLabel": "Lower Level (B)",
+      "floorNumber": 0,
+      "mapImage": "bird_floor_B.jpg",
+      "highlights": [
+        "Quiet Reading Room",
+        "CLASS Tutoring & Academic Support",
+        "Syracuse Abroad @ Bird",
+        "Electronic Training Center"
+      ],
+      "zones": [
+        {
+          "zoneId": "B_quiet_reading",
+          "name": "Quiet Reading Room",
+          "roomNumber": "008",
+          "type": "quiet_space",
+          "compassDirection": "north",
+          "bearingFromCenter": 0,
+          "relativePosition": "top-center",
+          "description": "Large quiet reading room with individual study seating. Includes rooms 008A-008F and 008EA-008EB.",
+          "subRooms": ["008A", "008B", "008C", "008D", "008E", "008EA", "008EB", "008F", "008G", "008H", "008J", "008K", "008L"]
+        },
+        {
+          "zoneId": "B_spector_seminar",
+          "name": "Spector Seminar Room",
+          "roomNumber": "004",
+          "type": "classroom",
+          "compassDirection": "west",
+          "bearingFromCenter": 270,
+          "relativePosition": "center-left",
+          "description": "Seminar classroom for instruction and events."
+        },
+        {
+          "zoneId": "B_class_tutoring",
+          "name": "CLASS - Tutoring & Academic Support",
+          "roomNumber": null,
+          "type": "student_success",
+          "compassDirection": "north",
+          "bearingFromCenter": 15,
+          "relativePosition": "top-center",
+          "description": "Center for Learning and Student Success providing tutoring and academic support."
+        },
+        {
+          "zoneId": "B_class_office",
+          "name": "CLASS Office",
+          "roomNumber": "014",
+          "type": "office",
+          "compassDirection": "east",
+          "bearingFromCenter": 90,
+          "relativePosition": "center-right",
+          "description": "Administrative office for CLASS."
+        },
+        {
+          "zoneId": "B_syracuse_abroad",
+          "name": "Syracuse Abroad @ Bird",
+          "roomNumber": "002",
+          "type": "student_success",
+          "compassDirection": "southwest",
+          "bearingFromCenter": 225,
+          "relativePosition": "bottom-left",
+          "description": "Syracuse University study abroad information and advising center."
+        },
+        {
+          "zoneId": "B_etc",
+          "name": "Electronic Training Center (ETC)",
+          "roomNumber": "046",
+          "type": "classroom",
+          "compassDirection": "south",
+          "bearingFromCenter": 180,
+          "relativePosition": "bottom-center",
+          "description": "Technology-equipped classroom for electronic training."
+        },
+        {
+          "zoneId": "B_open_study_center",
+          "name": "Open Study Area",
+          "roomNumber": null,
+          "type": "open_study",
+          "compassDirection": "west",
+          "bearingFromCenter": 250,
+          "relativePosition": "center",
+          "description": "General open study seating area."
+        }
+      ],
+      "studyRooms": [
+        { "roomNumber": "012", "type": "study_room" },
+        { "roomNumber": "016", "type": "study_room" },
+        { "roomNumber": "017", "type": "study_room" },
+        { "roomNumber": "021", "type": "study_room" },
+        { "roomNumber": "022", "type": "study_room" },
+        { "roomNumber": "023", "type": "study_room" },
+        { "roomNumber": "024", "type": "study_room" },
+        { "roomNumber": "025", "type": "study_room" },
+        { "roomNumber": "026", "type": "study_room" },
+        { "roomNumber": "029", "type": "study_room" },
+        { "roomNumber": "029A", "type": "study_room" },
+        { "roomNumber": "033", "type": "study_room" },
+        { "roomNumber": "035", "type": "study_room" },
+        { "roomNumber": "036", "type": "study_room" },
+        { "roomNumber": "037", "type": "study_room" },
+        { "roomNumber": "038", "type": "study_room" },
+        { "roomNumber": "038A", "type": "study_room" },
+        { "roomNumber": "039", "type": "study_room" },
+        { "roomNumber": "041", "type": "study_room" },
+        { "roomNumber": "044", "type": "study_room" },
+        { "roomNumber": "045", "type": "study_room" },
+        { "roomNumber": "048A", "type": "study_room" },
+        { "roomNumber": "050", "type": "study_room" }
+      ],
+      "amenities": {
+        "restrooms": [
+          { "type": "universal", "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "elevators": {
+          "staff": { "compassDirection": "east", "relativePosition": "center-right" },
+          "public": { "count": 3, "compassDirection": "east", "relativePosition": "center-right" }
+        },
+        "printers": [
+          { "compassDirection": "south", "relativePosition": "bottom-center", "nearRoom": "046" }
+        ],
+        "waterFountains": [],
+        "stairs": { "compassDirection": "south", "relativePosition": "bottom-center" },
+        "exits": [
+          { "direction": "west", "relativePosition": "left" },
+          { "direction": "east", "label": "EXIT", "relativePosition": "right-top" },
+          { "direction": "east", "label": "EXIT", "relativePosition": "right-bottom" },
+          { "direction": "south", "label": "EXIT near 050", "relativePosition": "bottom-left" }
+        ]
+      }
+    },
+    {
+      "floorId": "1",
+      "floorName": "First Floor",
+      "floorLabel": "First Floor (1)",
+      "floorNumber": 1,
+      "mapImage": "bird_floor_1.jpg",
+      "highlights": [
+        "Pages Café",
+        "LaunchPad - Entrepreneurship & Innovation Hub",
+        "Miron Learning Commons",
+        "Peter Graham Scholarly Commons"
+      ],
+      "zones": [
+        {
+          "zoneId": "1_launchpad",
+          "name": "LaunchPad - Entrepreneurship and Innovation Hub",
+          "roomNumber": "120",
+          "type": "student_success",
+          "compassDirection": "west",
+          "bearingFromCenter": 270,
+          "relativePosition": "center-left",
+          "description": "Blackstone LaunchPad entrepreneurship center supporting student innovation and startup development."
+        },
+        {
+          "zoneId": "1_miron_learning_commons",
+          "name": "Diane and Bob Miron '59 Learning Commons",
+          "roomNumber": null,
+          "type": "learning_commons",
+          "compassDirection": "east",
+          "bearingFromCenter": 80,
+          "relativePosition": "center-right",
+          "description": "Collaborative learning space with technology and study areas. Heart of the first floor."
+        },
+        {
+          "zoneId": "1_pages_cafe",
+          "name": "Pages Café",
+          "roomNumber": null,
+          "type": "dining",
+          "compassDirection": "east",
+          "bearingFromCenter": 110,
+          "relativePosition": "right-center",
+          "description": "Coffee shop and café with seating area. Located on the east side of the first floor."
+        },
+        {
+          "zoneId": "1_pages_cafe_seating",
+          "name": "Pages Café Seating",
+          "roomNumber": null,
+          "type": "dining",
+          "compassDirection": "southeast",
+          "bearingFromCenter": 150,
+          "relativePosition": "bottom-right",
+          "description": "Extended seating area for Pages Café. Vending machines and ATM nearby."
+        },
+        {
+          "zoneId": "1_pgsc",
+          "name": "Peter Graham Scholarly Commons (PGSC)",
+          "roomNumber": "114",
+          "type": "scholarly_commons",
+          "compassDirection": "south",
+          "bearingFromCenter": 190,
+          "relativePosition": "bottom-center",
+          "description": "Scholarly commons space for research and collaboration."
+        },
+        {
+          "zoneId": "1_checkout",
+          "name": "Check Out Desk",
+          "roomNumber": null,
+          "type": "service_desk",
+          "compassDirection": "east",
+          "bearingFromCenter": 80,
+          "relativePosition": "right-center",
+          "description": "Main circulation desk for checking out and returning library materials."
+        },
+        {
+          "zoneId": "1_research_printing",
+          "name": "Research and Printing Desk",
+          "roomNumber": "103",
+          "type": "service_desk",
+          "compassDirection": "east",
+          "bearingFromCenter": 75,
+          "relativePosition": "right-top",
+          "description": "Service desk for research assistance and printing help. Includes rooms 103A and 103B."
+        },
+        {
+          "zoneId": "1_open_study",
+          "name": "Open Study Area",
+          "roomNumber": null,
+          "type": "open_study",
+          "compassDirection": "north",
+          "bearingFromCenter": 350,
+          "relativePosition": "top-center",
+          "description": "Large open study area on the first floor with varied seating."
+        },
+        {
+          "zoneId": "1_featured_collections",
+          "name": "Featured Collections",
+          "roomNumber": null,
+          "type": "exhibition",
+          "compassDirection": "south",
+          "bearingFromCenter": 200,
+          "relativePosition": "bottom-center",
+          "description": "Rotating featured collections display area with exhibit case."
+        },
+        {
+          "zoneId": "1_vending",
+          "name": "Vending Machines",
+          "roomNumber": "122",
+          "type": "dining",
+          "compassDirection": "northwest",
+          "bearingFromCenter": 315,
+          "relativePosition": "top-left",
+          "description": "Vending machines area."
+        },
+        {
+          "zoneId": "1_assistive_tech",
+          "name": "Assistive Technology Room",
+          "roomNumber": "123",
+          "type": "technology",
+          "compassDirection": "north",
+          "bearingFromCenter": 350,
+          "relativePosition": "top-center",
+          "description": "Room with assistive technology equipment and resources."
+        },
+        {
+          "zoneId": "1_security",
+          "name": "Security / Lost & Found / DPS Office",
+          "roomNumber": "125",
+          "type": "office",
+          "compassDirection": "north",
+          "bearingFromCenter": 10,
+          "relativePosition": "top-center",
+          "description": "Department of Public Safety office. Lost and found items can be retrieved here."
+        },
+        {
+          "zoneId": "1_self_checkout",
+          "name": "Self Check Out Kiosk",
+          "roomNumber": null,
+          "type": "service",
+          "compassDirection": "northeast",
+          "bearingFromCenter": 50,
+          "relativePosition": "top-right",
+          "description": "Self-service kiosk for checking out books."
+        }
+      ],
+      "studyRooms": [
+        { "roomNumber": "100", "type": "study_room" },
+        { "roomNumber": "100A-100F", "type": "study_rooms" },
+        { "roomNumber": "102", "type": "room" },
+        { "roomNumber": "109", "type": "study_room" },
+        { "roomNumber": "118", "type": "study_room" }
+      ],
+      "amenities": {
+        "restrooms": [
+          { "type": "women", "compassDirection": "northwest", "relativePosition": "top-left" },
+          { "type": "men", "compassDirection": "northwest", "relativePosition": "top-left" },
+          { "type": "accessible", "compassDirection": "northwest", "relativePosition": "top-left" }
+        ],
+        "elevators": {
+          "staff": { "compassDirection": "east", "relativePosition": "center-right" },
+          "public": { "count": 3, "compassDirection": "east", "relativePosition": "center-right" }
+        },
+        "printers": [
+          { "label": "Print Copy Scan", "compassDirection": "east", "relativePosition": "right-center" },
+          { "label": "Poster Printers", "compassDirection": "east", "relativePosition": "right-top" }
+        ],
+        "waterFountains": [],
+        "computerWorkstations": true,
+        "stairs": { "compassDirection": "west", "relativePosition": "center-left" },
+        "exits": [
+          { "direction": "northwest", "label": "EXIT", "relativePosition": "top-left" },
+          { "direction": "northeast", "label": "EXIT to Waverly Ave", "relativePosition": "top-right" },
+          { "direction": "east", "label": "EXIT", "relativePosition": "right" },
+          { "direction": "south", "label": "EXIT to University (Einhorn Family Walk)", "relativePosition": "bottom-center" },
+          { "direction": "southeast", "label": "EXIT", "relativePosition": "bottom-right" },
+          { "direction": "southwest", "label": "EXIT", "relativePosition": "bottom-left" }
+        ],
+        "atm": { "compassDirection": "southeast", "relativePosition": "bottom-right" },
+        "vendingMachines": [
+          { "compassDirection": "northwest", "relativePosition": "top-left" },
+          { "compassDirection": "southeast", "relativePosition": "bottom-right" }
+        ],
+        "littleFreeBird": { "compassDirection": "east", "relativePosition": "right-bottom", "description": "Little Free Bird book sharing station" }
+      }
+    },
+    {
+      "floorId": "2",
+      "floorName": "Second Floor",
+      "floorLabel": "Second Floor (2)",
+      "floorNumber": 2,
+      "mapImage": "bird_floor_2.jpg",
+      "highlights": [
+        "Current Periodicals",
+        "Philosophy & Psychology collections",
+        "History collection",
+        "Quiet Computer Area",
+        "Dean's Office / Library Administration"
+      ],
+      "zones": [
+        {
+          "zoneId": "2_fys",
+          "name": "FYS - First Year Seminar Office",
+          "roomNumber": "238",
+          "type": "office",
+          "compassDirection": "northwest",
+          "bearingFromCenter": 330,
+          "relativePosition": "top-left",
+          "description": "First Year Seminar administrative office. Includes rooms 238A and 238B."
+        },
+        {
+          "zoneId": "2_librarian_offices",
+          "name": "Librarian Offices",
+          "roomNumber": "200",
+          "type": "office",
+          "compassDirection": "northeast",
+          "bearingFromCenter": 30,
+          "relativePosition": "top-right",
+          "description": "Offices for reference and subject librarians. Includes 200A and 200B."
+        },
+        {
+          "zoneId": "2_periodicals",
+          "name": "Current Periodicals",
+          "roomNumber": "TR",
+          "type": "book_stacks",
+          "compassDirection": "west",
+          "bearingFromCenter": 260,
+          "relativePosition": "center-left",
+          "description": "Current periodicals and magazine reading area."
+        },
+        {
+          "zoneId": "2_reference",
+          "name": "Encyclopedias, Dictionaries, Photography, Reference AE-Z, Oversize AE-D",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "north",
+          "bearingFromCenter": 350,
+          "relativePosition": "center",
+          "description": "Reference collection including encyclopedias, dictionaries, and photography materials."
+        },
+        {
+          "zoneId": "2_philosophy_psychology",
+          "name": "Philosophy & Psychology",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "east",
+          "bearingFromCenter": 70,
+          "relativePosition": "top-right",
+          "description": "Philosophy (BF-BL) and Psychology collections. Call number range B-BE through BF-BL."
+        },
+        {
+          "zoneId": "2_history",
+          "name": "History",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "south",
+          "bearingFromCenter": 200,
+          "relativePosition": "bottom-left",
+          "description": "History collection. Call number range D through BX."
+        },
+        {
+          "zoneId": "2_religion",
+          "name": "Religion",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "southeast",
+          "bearingFromCenter": 140,
+          "relativePosition": "bottom-right",
+          "description": "Religion collection. Call number range BX through BS."
+        },
+        {
+          "zoneId": "2_newspapers",
+          "name": "Newspapers",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "southwest",
+          "bearingFromCenter": 220,
+          "relativePosition": "bottom-left",
+          "description": "Current newspaper collection."
+        },
+        {
+          "zoneId": "2_quiet_computer",
+          "name": "Quiet Computer Area",
+          "roomNumber": null,
+          "type": "quiet_space",
+          "compassDirection": "east",
+          "bearingFromCenter": 90,
+          "relativePosition": "right",
+          "description": "Designated quiet area with computer workstations."
+        },
+        {
+          "zoneId": "2_quiet_area",
+          "name": "Quiet Area",
+          "roomNumber": null,
+          "type": "quiet_space",
+          "compassDirection": "east",
+          "bearingFromCenter": 100,
+          "relativePosition": "right-bottom",
+          "description": "Quiet study space on the east side."
+        },
+        {
+          "zoneId": "2_deans_office",
+          "name": "Dean's Office / Library Administration",
+          "roomNumber": "221",
+          "type": "office",
+          "compassDirection": "south",
+          "bearingFromCenter": 180,
+          "relativePosition": "bottom-center",
+          "description": "Library Dean's office and administration. Rooms 219-223."
+        },
+        {
+          "zoneId": "2_room_210",
+          "name": "Room 210",
+          "roomNumber": "210",
+          "type": "room",
+          "compassDirection": "east",
+          "bearingFromCenter": 100,
+          "relativePosition": "right-center",
+          "description": "Multi-purpose room."
+        }
+      ],
+      "studyRooms": [],
+      "amenities": {
+        "restrooms": [],
+        "elevators": {
+          "staff": { "compassDirection": "east", "relativePosition": "center-right" },
+          "public": { "count": 3, "compassDirection": "east", "relativePosition": "center-right" }
+        },
+        "printers": [
+          { "label": "Print Copy Scan", "compassDirection": "east", "relativePosition": "right-center" }
+        ],
+        "waterFountains": [
+          { "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "computerWorkstations": true,
+        "catalog": { "compassDirection": "east", "relativePosition": "center" },
+        "stairs": [
+          { "compassDirection": "east", "relativePosition": "center" },
+          { "compassDirection": "south", "relativePosition": "bottom-center" }
+        ],
+        "exits": [
+          { "direction": "northwest", "label": "EXIT", "relativePosition": "top-left" },
+          { "direction": "northeast", "label": "EXIT", "relativePosition": "top-right" },
+          { "direction": "southwest", "label": "EXIT", "relativePosition": "bottom-left" },
+          { "direction": "southeast", "label": "EXIT", "relativePosition": "bottom-right" }
+        ]
+      }
+    },
+    {
+      "floorId": "3",
+      "floorName": "Third Floor",
+      "floorLabel": "Third Floor (3)",
+      "floorNumber": 3,
+      "mapImage": "bird_floor_3.jpg",
+      "highlights": [
+        "Map Room",
+        "Government Information",
+        "History & Social Sciences collections",
+        "Atlases"
+      ],
+      "zones": [
+        {
+          "zoneId": "3_map_room",
+          "name": "Map Room",
+          "roomNumber": "333",
+          "type": "special_collection",
+          "compassDirection": "west",
+          "bearingFromCenter": 260,
+          "relativePosition": "center-left",
+          "description": "Library Map Room with cartographic materials, atlases, and geographic reference resources. Includes rooms 333A, 333B, 333C, 333D."
+        },
+        {
+          "zoneId": "3_gov_info",
+          "name": "Government Information",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "northwest",
+          "bearingFromCenter": 310,
+          "relativePosition": "center-left",
+          "description": "U.S. Government publications. Part of Federal Depository Library Program for over 140 years."
+        },
+        {
+          "zoneId": "3_history_north",
+          "name": "History (North stacks)",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "north",
+          "bearingFromCenter": 10,
+          "relativePosition": "top-right",
+          "description": "History collection. Call number range DA through DS."
+        },
+        {
+          "zoneId": "3_history_center",
+          "name": "History (Center stacks)",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "east",
+          "bearingFromCenter": 80,
+          "relativePosition": "center-right",
+          "description": "History collection continuation. Call number range DA through DS."
+        },
+        {
+          "zoneId": "3_geography_social_sciences",
+          "name": "Geography / Social Sciences",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "east",
+          "bearingFromCenter": 100,
+          "relativePosition": "right",
+          "description": "Geography and social sciences collection."
+        },
+        {
+          "zoneId": "3_general_social_sciences",
+          "name": "General Social Sciences",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "south",
+          "bearingFromCenter": 190,
+          "relativePosition": "bottom-center",
+          "description": "General social sciences stacks. Call number range HD through GN."
+        },
+        {
+          "zoneId": "3_atlases",
+          "name": "Atlases",
+          "roomNumber": null,
+          "type": "special_collection",
+          "compassDirection": "southwest",
+          "bearingFromCenter": 230,
+          "relativePosition": "bottom-left",
+          "description": "Atlas collection adjacent to Map Room."
+        },
+        {
+          "zoneId": "3_microfilm",
+          "name": "Microfilm and Microfiche Reader / Digitization and General Computers",
+          "roomNumber": null,
+          "type": "technology",
+          "compassDirection": "north",
+          "bearingFromCenter": 5,
+          "relativePosition": "center",
+          "description": "Microfilm and microfiche readers, digitization stations, and general-use computers."
+        },
+        {
+          "zoneId": "3_checkout_to_help",
+          "name": "Checkout to Help / Service Desk",
+          "roomNumber": "358",
+          "type": "service_desk",
+          "compassDirection": "east",
+          "bearingFromCenter": 80,
+          "relativePosition": "center",
+          "description": "Service desk for third floor assistance."
+        },
+        {
+          "zoneId": "3_room_348",
+          "name": "Room 348",
+          "roomNumber": "348",
+          "type": "room",
+          "compassDirection": "east",
+          "bearingFromCenter": 90,
+          "relativePosition": "center-right",
+          "description": "Multi-purpose room."
+        }
+      ],
+      "studyRooms": [
+        { "roomNumber": "300", "type": "study_room" },
+        { "roomNumber": "301", "type": "study_room" },
+        { "roomNumber": "302", "type": "study_room" },
+        { "roomNumber": "303", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "303A", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "304", "type": "study_room" },
+        { "roomNumber": "305", "type": "study_room" },
+        { "roomNumber": "306", "type": "study_room" },
+        { "roomNumber": "308", "type": "study_room" },
+        { "roomNumber": "309", "type": "study_room" },
+        { "roomNumber": "310", "type": "study_room" },
+        { "roomNumber": "311", "type": "study_room" },
+        { "roomNumber": "312", "type": "study_room" },
+        { "roomNumber": "313", "type": "study_room" },
+        { "roomNumber": "315", "type": "study_room" },
+        { "roomNumber": "316", "type": "study_room" },
+        { "roomNumber": "317", "type": "study_room" },
+        { "roomNumber": "318", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "318A", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "320", "type": "study_room" },
+        { "roomNumber": "321", "type": "study_room" },
+        { "roomNumber": "322", "type": "study_room" },
+        { "roomNumber": "323", "type": "study_room" },
+        { "roomNumber": "324", "type": "study_room" },
+        { "roomNumber": "325", "type": "study_room" },
+        { "roomNumber": "326", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "326A", "type": "study_room" },
+        { "roomNumber": "327", "type": "study_room" },
+        { "roomNumber": "328", "type": "study_room" },
+        { "roomNumber": "329", "type": "study_room" },
+        { "roomNumber": "331", "type": "study_room" },
+        { "roomNumber": "334", "type": "study_room" },
+        { "roomNumber": "335", "type": "study_room" },
+        { "roomNumber": "336", "type": "study_room" },
+        { "roomNumber": "338", "type": "study_room" },
+        { "roomNumber": "339", "type": "study_room" },
+        { "roomNumber": "340", "type": "study_room" },
+        { "roomNumber": "341", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "341A", "type": "study_room" },
+        { "roomNumber": "342", "type": "study_room" },
+        { "roomNumber": "343", "type": "study_room" },
+        { "roomNumber": "344", "type": "study_room" },
+        { "roomNumber": "351", "type": "study_room" },
+        { "roomNumber": "352", "type": "study_room" },
+        { "roomNumber": "353", "type": "study_room" }
+      ],
+      "amenities": {
+        "restrooms": [
+          { "type": "women", "compassDirection": "east", "relativePosition": "center-right" },
+          { "type": "men", "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "elevators": {
+          "staff": { "compassDirection": "east", "relativePosition": "center-right" },
+          "public": { "count": 3, "compassDirection": "east", "relativePosition": "center-right" }
+        },
+        "printers": [
+          { "label": "Print Copy Scan", "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "waterFountains": [
+          { "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "computerWorkstations": true,
+        "catalog": { "compassDirection": "east", "relativePosition": "center" },
+        "stairs": { "compassDirection": "east", "relativePosition": "center" },
+        "exits": [
+          { "direction": "northwest", "label": "EXIT", "relativePosition": "top-left" },
+          { "direction": "northeast", "label": "EXIT", "relativePosition": "top-right" },
+          { "direction": "southwest", "label": "EXIT", "relativePosition": "bottom-left" },
+          { "direction": "southeast", "label": "EXIT", "relativePosition": "bottom-right" }
+        ]
+      }
+    },
+    {
+      "floorId": "4",
+      "floorName": "Fourth Floor",
+      "floorLabel": "Fourth Floor (4)",
+      "floorNumber": 4,
+      "mapImage": "bird_floor_4.jpg",
+      "highlights": [
+        "Digital Scholarship Space (DSS)",
+        "Music & Media Playback",
+        "Art & Architecture collection",
+        "Biblio Gallery"
+      ],
+      "zones": [
+        {
+          "zoneId": "4_dss",
+          "name": "DSS - Digital Scholarship Space",
+          "roomNumber": "458",
+          "type": "technology",
+          "compassDirection": "west",
+          "bearingFromCenter": 270,
+          "relativePosition": "center",
+          "description": "Digital scholarship workspace with specialized technology and equipment."
+        },
+        {
+          "zoneId": "4_music_stacks",
+          "name": "Music",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "west",
+          "bearingFromCenter": 270,
+          "relativePosition": "center-left",
+          "description": "Music book stacks and collection."
+        },
+        {
+          "zoneId": "4_music_lps",
+          "name": "Music LPs, Scores, Records",
+          "roomNumber": null,
+          "type": "special_collection",
+          "compassDirection": "northwest",
+          "bearingFromCenter": 320,
+          "relativePosition": "top-left",
+          "description": "Collection of music LPs, scores, and record materials. Call number range HD-HE."
+        },
+        {
+          "zoneId": "4_media_playback",
+          "name": "Media Playback",
+          "roomNumber": null,
+          "type": "technology",
+          "compassDirection": "west",
+          "bearingFromCenter": 250,
+          "relativePosition": "center-left",
+          "description": "Media playback stations for audio and video materials."
+        },
+        {
+          "zoneId": "4_political_science",
+          "name": "Political Science",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "north",
+          "bearingFromCenter": 10,
+          "relativePosition": "top-center",
+          "description": "Political Science collection. Call number range HF through HX."
+        },
+        {
+          "zoneId": "4_labor_comm_finance",
+          "name": "Labor, Communications, Finance, Sociology",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "north",
+          "bearingFromCenter": 20,
+          "relativePosition": "top-right",
+          "description": "Collections covering labor studies, communications, finance, and sociology. Call number range HE through HV, then HV through JF."
+        },
+        {
+          "zoneId": "4_art_architecture",
+          "name": "Art & Architecture",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "south",
+          "bearingFromCenter": 190,
+          "relativePosition": "bottom-center",
+          "description": "Art and architecture collection. Call number range NA."
+        },
+        {
+          "zoneId": "4_law_education_music",
+          "name": "Law, Education, Music Books/Scores",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "east",
+          "bearingFromCenter": 100,
+          "relativePosition": "right",
+          "description": "Collections covering law, education, and music reference materials."
+        },
+        {
+          "zoneId": "4_biblio_gallery",
+          "name": "Biblio Gallery",
+          "roomNumber": "448",
+          "type": "exhibition",
+          "compassDirection": "east",
+          "bearingFromCenter": 80,
+          "relativePosition": "center-right",
+          "description": "Exhibition and gallery space for displays and art."
+        },
+        {
+          "zoneId": "4_room_463",
+          "name": "Room 463",
+          "roomNumber": "463",
+          "type": "room",
+          "compassDirection": "west",
+          "bearingFromCenter": 260,
+          "relativePosition": "center-left",
+          "description": "Multi-purpose room near music stacks."
+        }
+      ],
+      "studyRooms": [
+        { "roomNumber": "400", "type": "study_room" },
+        { "roomNumber": "401", "type": "study_room" },
+        { "roomNumber": "402", "type": "study_room" },
+        { "roomNumber": "403", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "403A", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "404", "type": "study_room" },
+        { "roomNumber": "405", "type": "study_room" },
+        { "roomNumber": "406", "type": "study_room" },
+        { "roomNumber": "408", "type": "study_room" },
+        { "roomNumber": "409", "type": "study_room" },
+        { "roomNumber": "410", "type": "study_room" },
+        { "roomNumber": "411", "type": "study_room" },
+        { "roomNumber": "412", "type": "study_room" },
+        { "roomNumber": "413", "type": "study_room" },
+        { "roomNumber": "415", "type": "study_room" },
+        { "roomNumber": "416", "type": "study_room" },
+        { "roomNumber": "417", "type": "study_room" },
+        { "roomNumber": "418", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "418A", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "420", "type": "study_room" },
+        { "roomNumber": "421", "type": "study_room" },
+        { "roomNumber": "422", "type": "study_room" },
+        { "roomNumber": "423", "type": "study_room" },
+        { "roomNumber": "424", "type": "study_room" },
+        { "roomNumber": "425", "type": "study_room" },
+        { "roomNumber": "426", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "426A", "type": "study_room" },
+        { "roomNumber": "427", "type": "study_room" },
+        { "roomNumber": "428", "type": "study_room" },
+        { "roomNumber": "429", "type": "study_room" },
+        { "roomNumber": "431", "type": "study_room" },
+        { "roomNumber": "432", "type": "study_room" },
+        { "roomNumber": "434", "type": "study_room" },
+        { "roomNumber": "435", "type": "study_room" },
+        { "roomNumber": "436", "type": "study_room" },
+        { "roomNumber": "438", "type": "study_room" },
+        { "roomNumber": "439", "type": "study_room" },
+        { "roomNumber": "440", "type": "study_room" },
+        { "roomNumber": "441", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "441A", "type": "study_room" },
+        { "roomNumber": "442", "type": "study_room" },
+        { "roomNumber": "443", "type": "study_room" },
+        { "roomNumber": "444", "type": "study_room" },
+        { "roomNumber": "451", "type": "study_room" },
+        { "roomNumber": "452", "type": "study_room" },
+        { "roomNumber": "453", "type": "study_room" },
+        { "roomNumber": "454", "type": "study_room" }
+      ],
+      "amenities": {
+        "restrooms": [
+          { "type": "women", "compassDirection": "east", "relativePosition": "center-right" },
+          { "type": "men", "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "elevators": {
+          "staff": { "compassDirection": "east", "relativePosition": "center-right" },
+          "public": { "count": 3, "compassDirection": "east", "relativePosition": "center-right" }
+        },
+        "printers": [
+          { "label": "Print Copy Scan", "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "waterFountains": [
+          { "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "computerWorkstations": true,
+        "catalog": { "compassDirection": "east", "relativePosition": "center" },
+        "stairs": { "compassDirection": "east", "relativePosition": "center" },
+        "exits": [
+          { "direction": "northwest", "label": "EXIT", "relativePosition": "top-left" },
+          { "direction": "northeast", "label": "EXIT", "relativePosition": "top-right" },
+          { "direction": "southwest", "label": "EXIT", "relativePosition": "bottom-left" },
+          { "direction": "southeast", "label": "EXIT", "relativePosition": "bottom-right" }
+        ]
+      }
+    },
+    {
+      "floorId": "5",
+      "floorName": "Fifth Floor",
+      "floorLabel": "Fifth Floor (5)",
+      "floorNumber": 5,
+      "mapImage": "bird_floor_5.jpg",
+      "highlights": [
+        "Languages, Literature & Linguistics",
+        "Mower Faculty Commons",
+        "Center for Teaching and Learning Excellence",
+        "Fine Arts & Languages"
+      ],
+      "zones": [
+        {
+          "zoneId": "5_languages_lit",
+          "name": "Languages, Literature, Linguistics",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "north",
+          "bearingFromCenter": 350,
+          "relativePosition": "center",
+          "description": "Major collection covering languages, literature, and linguistics. Call number range PR through PZ. Spans center and north of the floor."
+        },
+        {
+          "zoneId": "5_mower_faculty_commons",
+          "name": "Mower Faculty Commons",
+          "roomNumber": "548",
+          "type": "faculty_success",
+          "compassDirection": "northeast",
+          "bearingFromCenter": 45,
+          "relativePosition": "top-right",
+          "description": "Faculty-only commons with three reservable meeting/conference rooms. Wellness room with massage chair available."
+        },
+        {
+          "zoneId": "5_ctle",
+          "name": "Center for Teaching and Learning Excellence",
+          "roomNumber": "550",
+          "type": "faculty_success",
+          "compassDirection": "east",
+          "bearingFromCenter": 90,
+          "relativePosition": "right",
+          "description": "Center supporting faculty teaching development and pedagogical excellence."
+        },
+        {
+          "zoneId": "5_fine_arts_languages",
+          "name": "Fine Arts / Languages",
+          "roomNumber": null,
+          "type": "book_stacks",
+          "compassDirection": "south",
+          "bearingFromCenter": 180,
+          "relativePosition": "bottom-center",
+          "description": "Fine arts and additional languages collection."
+        }
+      ],
+      "studyRooms": [
+        { "roomNumber": "500", "type": "study_room" },
+        { "roomNumber": "501", "type": "study_room" },
+        { "roomNumber": "502", "type": "study_room" },
+        { "roomNumber": "503", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "503A", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "504", "type": "study_room" },
+        { "roomNumber": "505", "type": "study_room" },
+        { "roomNumber": "506", "type": "study_room" },
+        { "roomNumber": "515", "type": "study_room" },
+        { "roomNumber": "516", "type": "study_room" },
+        { "roomNumber": "517", "type": "study_room" },
+        { "roomNumber": "518", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "518A", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "520", "type": "study_room" },
+        { "roomNumber": "521", "type": "study_room" },
+        { "roomNumber": "522", "type": "study_room" },
+        { "roomNumber": "524", "type": "study_room" },
+        { "roomNumber": "525", "type": "study_room" },
+        { "roomNumber": "526", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "526A", "type": "study_room" },
+        { "roomNumber": "527", "type": "study_room" },
+        { "roomNumber": "528", "type": "study_room" },
+        { "roomNumber": "529", "type": "study_room" },
+        { "roomNumber": "531", "type": "study_room" },
+        { "roomNumber": "532", "type": "study_room" },
+        { "roomNumber": "533", "type": "study_room" },
+        { "roomNumber": "534", "type": "study_room" },
+        { "roomNumber": "535", "type": "study_room" },
+        { "roomNumber": "536", "type": "study_room" },
+        { "roomNumber": "537", "type": "study_room" },
+        { "roomNumber": "538", "type": "study_room" },
+        { "roomNumber": "539", "type": "study_room" },
+        { "roomNumber": "540", "type": "study_room" },
+        { "roomNumber": "541", "type": "study_room" },
+        { "roomNumber": "542", "type": "study_room" },
+        { "roomNumber": "543", "type": "study_room", "isTeamRoom": true },
+        { "roomNumber": "543A", "type": "study_room" },
+        { "roomNumber": "544", "type": "study_room" },
+        { "roomNumber": "545", "type": "study_room" },
+        { "roomNumber": "546", "type": "study_room" },
+        { "roomNumber": "551", "type": "study_room" },
+        { "roomNumber": "552", "type": "study_room" },
+        { "roomNumber": "553", "type": "study_room" },
+        { "roomNumber": "554", "type": "study_room" },
+        { "roomNumber": "555", "type": "study_room" },
+        { "roomNumber": "556", "type": "study_room" }
+      ],
+      "amenities": {
+        "restrooms": [
+          { "type": "universal", "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "elevators": {
+          "staff": { "compassDirection": "east", "relativePosition": "center-right" },
+          "public": { "count": 3, "compassDirection": "east", "relativePosition": "center-right" }
+        },
+        "printers": [
+          { "label": "Print Copy Scan", "compassDirection": "east", "relativePosition": "center-right" }
+        ],
+        "waterFountains": [],
+        "computerWorkstations": true,
+        "selfCheckOut": { "compassDirection": "east", "relativePosition": "center-right" },
+        "catalog": { "compassDirection": "east", "relativePosition": "center" },
+        "stairs": { "compassDirection": "east", "relativePosition": "center" },
+        "exits": [
+          { "direction": "northwest", "label": "EXIT", "relativePosition": "top-left" },
+          { "direction": "northeast", "label": "EXIT", "relativePosition": "top-right" },
+          { "direction": "southwest", "label": "EXIT", "relativePosition": "bottom-left" },
+          { "direction": "southeast", "label": "EXIT", "relativePosition": "bottom-right" }
+        ]
+      }
+    },
+    {
+      "floorId": "6",
+      "floorName": "Sixth Floor",
+      "floorLabel": "Sixth Floor (6)",
+      "floorNumber": 6,
+      "mapImage": "bird_floor_6.jpg",
+      "highlights": [
+        "Special Collections Research Center (SCRC)",
+        "Syracuse University Archives",
+        "Main Gallery",
+        "SCRC Reading Room"
+      ],
+      "accessNote": "The 6th Floor is only accessible via elevator.",
+      "zones": [
+        {
+          "zoneId": "6_scrc_reading_room",
+          "name": "SCRC Reading Room",
+          "roomNumber": null,
+          "type": "special_collection",
+          "compassDirection": "east",
+          "bearingFromCenter": 80,
+          "relativePosition": "right",
+          "description": "Special Collections Research Center reading room. Access by appointment only."
+        },
+        {
+          "zoneId": "6_main_gallery",
+          "name": "Main Gallery",
+          "roomNumber": "600",
+          "type": "exhibition",
+          "compassDirection": "east",
+          "bearingFromCenter": 90,
+          "relativePosition": "right-center",
+          "description": "Main exhibition gallery for Special Collections displays."
+        },
+        {
+          "zoneId": "6_ortwine_gallery",
+          "name": "Robert Ortwine Gallery",
+          "roomNumber": null,
+          "type": "exhibition",
+          "compassDirection": "east",
+          "bearingFromCenter": 85,
+          "relativePosition": "center-right",
+          "description": "Ortwine exhibition gallery space."
+        },
+        {
+          "zoneId": "6_brodsky_conservation",
+          "name": "Brodsky Conservation Lab",
+          "roomNumber": null,
+          "type": "staff_area",
+          "compassDirection": "south",
+          "bearingFromCenter": 200,
+          "relativePosition": "bottom-center",
+          "description": "Conservation laboratory for preservation and restoration of special collections materials."
+        },
+        {
+          "zoneId": "6_plastics_pioneers",
+          "name": "Plastics Pioneers Reading Room",
+          "roomNumber": "610",
+          "type": "special_collection",
+          "compassDirection": "southwest",
+          "bearingFromCenter": 220,
+          "relativePosition": "bottom-left",
+          "description": "Reading room dedicated to plastics history and industry pioneers."
+        },
+        {
+          "zoneId": "6_spector_room",
+          "name": "Spector Room",
+          "roomNumber": "608",
+          "type": "meeting_room",
+          "compassDirection": "south",
+          "bearingFromCenter": 195,
+          "relativePosition": "bottom-left",
+          "description": "Meeting and event room."
+        },
+        {
+          "zoneId": "6_hillyer_room",
+          "name": "Hillyer Room",
+          "roomNumber": "606",
+          "type": "meeting_room",
+          "compassDirection": "south",
+          "bearingFromCenter": 180,
+          "relativePosition": "bottom-center",
+          "description": "Meeting and event room."
+        },
+        {
+          "zoneId": "6_safire_room",
+          "name": "William A. Safire Room",
+          "roomNumber": "605",
+          "type": "quiet_space",
+          "compassDirection": "south",
+          "bearingFromCenter": 170,
+          "relativePosition": "bottom-center",
+          "description": "Quiet reading and work room named for William Safire."
+        },
+        {
+          "zoneId": "6_lemke_seminar",
+          "name": "Lemke Seminar Room",
+          "roomNumber": null,
+          "type": "classroom",
+          "compassDirection": "east",
+          "bearingFromCenter": 100,
+          "relativePosition": "right-bottom",
+          "description": "Seminar room used for Special Collections instruction."
+        },
+        {
+          "zoneId": "6_help_desk",
+          "name": "Help Desk",
+          "roomNumber": null,
+          "type": "service_desk",
+          "compassDirection": "east",
+          "bearingFromCenter": 85,
+          "relativePosition": "right",
+          "description": "SCRC help desk for research assistance."
+        },
+        {
+          "zoneId": "6_secure_staff",
+          "name": "Secure Staff Area",
+          "roomNumber": null,
+          "type": "staff_area",
+          "compassDirection": "north",
+          "bearingFromCenter": 350,
+          "relativePosition": "top-center",
+          "description": "Restricted staff area for archival storage and processing."
+        }
+      ],
+      "studyRooms": [
+        { "roomNumber": "601", "type": "room" },
+        { "roomNumber": "602", "type": "room" },
+        { "roomNumber": "604", "type": "room" },
+        { "roomNumber": "604A", "type": "room" },
+        { "roomNumber": "604B", "type": "room" },
+        { "roomNumber": "607", "type": "room" }
+      ],
+      "amenities": {
+        "restrooms": [
+          { "type": "women", "compassDirection": "south", "relativePosition": "bottom-center" },
+          { "type": "men", "compassDirection": "south", "relativePosition": "bottom-center" },
+          { "type": "accessible", "compassDirection": "south", "relativePosition": "bottom-center" }
+        ],
+        "elevators": {
+          "staff": { "compassDirection": "east", "relativePosition": "center-right" },
+          "public": { "count": 3, "compassDirection": "east", "relativePosition": "center-right" }
+        },
+        "printers": [],
+        "waterFountains": [
+          { "compassDirection": "south", "relativePosition": "bottom" }
+        ],
+        "stairs": null,
+        "exits": [
+          { "direction": "southwest", "label": "EXIT", "relativePosition": "bottom-left" },
+          { "direction": "southeast", "label": "EXIT", "relativePosition": "bottom-right" }
+        ]
+      }
+    }
+  ],
+  "amenitySearch": {
+    "printers": [
+      { "floor": "B", "location": "Near Electronic Training Center (046)", "compassDirection": "south" },
+      { "floor": "1", "location": "Research and Printing desk area", "compassDirection": "east" },
+      { "floor": "1", "location": "Poster Printers near 103B", "compassDirection": "east" },
+      { "floor": "2", "location": "East side near elevators", "compassDirection": "east" },
+      { "floor": "3", "location": "East side near elevators", "compassDirection": "east" },
+      { "floor": "4", "location": "East side near elevators", "compassDirection": "east" },
+      { "floor": "5", "location": "East side near elevators", "compassDirection": "east" }
+    ],
+    "restrooms": [
+      { "floor": "B", "type": "universal", "compassDirection": "east" },
+      { "floor": "1", "types": ["women", "men", "accessible"], "compassDirection": "northwest" },
+      { "floor": "3", "types": ["women", "men"], "compassDirection": "east" },
+      { "floor": "4", "types": ["women", "men"], "compassDirection": "east" },
+      { "floor": "5", "type": "universal", "compassDirection": "east" },
+      { "floor": "6", "types": ["women", "men", "accessible"], "compassDirection": "south" }
+    ],
+    "waterFountains": [
+      { "floor": "2", "compassDirection": "east" },
+      { "floor": "3", "compassDirection": "east" },
+      { "floor": "4", "compassDirection": "east" },
+      { "floor": "6", "compassDirection": "south" }
+    ],
+    "elevators": {
+      "public": {
+        "count": 3,
+        "availableOnAllFloors": true,
+        "compassDirection": "east",
+        "note": "Public elevators 1, 2, and 3 are on the east side of every floor"
+      },
+      "staff": {
+        "availableOnAllFloors": true,
+        "compassDirection": "east",
+        "note": "Staff elevators adjacent to public elevators"
+      }
+    },
+    "quietSpaces": [
+      { "floor": "B", "name": "Quiet Reading Room", "roomNumber": "008" },
+      { "floor": "2", "name": "Quiet Computer Area", "location": "east side" },
+      { "floor": "2", "name": "Quiet Area", "location": "east side" },
+      { "floor": "6", "name": "Safire Room", "roomNumber": "605" }
+    ],
+    "dining": [
+      { "floor": "1", "name": "Pages Café", "compassDirection": "east" },
+      { "floor": "1", "name": "Pages Café Seating", "compassDirection": "southeast" },
+      { "floor": "1", "name": "Vending Machines", "compassDirection": "northwest", "roomNumber": "122" },
+      { "floor": "1", "name": "Vending Machines", "compassDirection": "southeast" },
+      { "floor": "1", "name": "ATM", "compassDirection": "southeast" }
+    ],
+    "studyRoomsByFloor": {
+      "B": 23,
+      "1": 5,
+      "2": 0,
+      "3": 47,
+      "4": 47,
+      "5": 46,
+      "6": 6
+    },
+    "teamRooms": [
+      { "floor": "3", "rooms": ["303/303A", "318/318A", "326", "341"] },
+      { "floor": "4", "rooms": ["403/403A", "418/418A", "426", "441"] },
+      { "floor": "5", "rooms": ["503/503A", "518/518A", "526", "543"] }
+    ]
+  },
+  "compassGuide": {
+    "description": "When the user is inside Bird Library and facing a compass direction, these are the major landmarks and zones they would be facing on each floor. Used for AR camera overlay.",
+    "floorGuides": {
+      "B": {
+        "north": "Quiet Reading Room (008)",
+        "northeast": "Rooms 008F-008L",
+        "east": "CLASS Office (014), Public Elevators, Restrooms",
+        "southeast": "Study rooms 023-038",
+        "south": "Electronic Training Center (046), Syracuse Abroad (002)",
+        "southwest": "EXIT, Room 050",
+        "west": "Spector Seminar Room (004), Open Study Area",
+        "northwest": "EXIT, Quiet Reading Room entry"
+      },
+      "1": {
+        "north": "Open Study Area, Assistive Technology (123), Security/DPS (125)",
+        "northeast": "EXIT to Waverly Ave, Rooms 100A-100F",
+        "east": "Miron Learning Commons, Check Out, Research & Printing, Pages Café",
+        "southeast": "Pages Café Seating, ATM, Vending, EXIT",
+        "south": "Peter Graham Scholarly Commons (114), EXIT to Einhorn Family Walk",
+        "southwest": "EXIT, Room 118",
+        "west": "LaunchPad (120), Featured Collections",
+        "northwest": "Vending Machines (122), EXIT"
+      },
+      "2": {
+        "north": "FYS Seminar (238), Librarian Offices (200), Open Study Area",
+        "northeast": "Rooms 200A-200B",
+        "east": "Philosophy & Psychology stacks, Quiet Computer Area, Print/Copy/Scan",
+        "southeast": "Religion stacks, Quiet Area",
+        "south": "Dean's Office / Library Administration (221), History stacks",
+        "southwest": "EXIT",
+        "west": "Current Periodicals, Newspapers, Open Study Area",
+        "northwest": "FYS rooms 238A-238B, EXIT"
+      },
+      "3": {
+        "north": "Open Study Area, History stacks (DA-DS), Study rooms 300-306",
+        "northeast": "Study rooms 303-310, EXIT",
+        "east": "Geography/Social Sciences, Room 348, Public Elevators",
+        "southeast": "Study rooms 311-318, EXIT",
+        "south": "General Social Sciences (HD-GN), Open Study Area, Study rooms 320-325",
+        "southwest": "Study rooms 326-331, EXIT, Oversize DA-F",
+        "west": "Map Room (333), Atlases, Government Information",
+        "northwest": "Study rooms 334-344, Microfilm/Microfiche, EXIT"
+      },
+      "4": {
+        "north": "Music LPs/Scores, Political Science, Labor/Communications/Finance, Open Study Area",
+        "northeast": "Study rooms 403-410, EXIT",
+        "east": "Biblio Gallery (448), Law/Education/Music, Public Elevators",
+        "southeast": "Study rooms 411-418, EXIT",
+        "south": "Art & Architecture, Open Study Area, Study rooms 420-425",
+        "southwest": "Study rooms 426-432, EXIT, Oversize HD-NB",
+        "west": "DSS Digital Scholarship (458), Music stacks, Media Playback",
+        "northwest": "Study rooms 434-444, EXIT"
+      },
+      "5": {
+        "north": "Languages/Literature/Linguistics (PR-PZ), Open Study Area",
+        "northeast": "Mower Faculty Commons (548), Study rooms 500-506, EXIT",
+        "east": "Center for Teaching & Learning Excellence (550), Public Elevators, Self Check Out",
+        "southeast": "Study rooms 515-522, EXIT",
+        "south": "Fine Arts/Languages, Open Study Area, Study rooms 524-525",
+        "southwest": "Study rooms 526-531, EXIT",
+        "west": "Languages/Literature/Linguistics stacks (PG-PR)",
+        "northwest": "Study rooms 537-546, EXIT"
+      },
+      "6": {
+        "north": "Secure Staff Area (Archives storage)",
+        "northeast": "Secure Staff Area",
+        "east": "SCRC Reading Room, Main Gallery (600), Help Desk, Lemke Seminar Room",
+        "southeast": "Safire Room (605), EXIT",
+        "south": "Spector Room (608), Hillyer Room (606), Brodsky Conservation Lab",
+        "southwest": "Plastics Pioneers Reading Room (610), EXIT",
+        "west": "Brodsky Conservation Lab",
+        "northwest": "Secure Staff Area"
+      }
+    }
+  }
+}
